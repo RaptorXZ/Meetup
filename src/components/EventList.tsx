@@ -39,7 +39,7 @@ const data: Events[] = [
         location: 'Gothenburg, Andra Lång',
         date: '22/3/2022',
         time: '18:30',
-        hostName: 'Daniel1212'
+        hostName: 'david1337'
     },
     {
         id: nanoid(),
