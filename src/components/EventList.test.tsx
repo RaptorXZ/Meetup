@@ -7,4 +7,12 @@ describe('EventList component', () => {
         render( <EventList /> )
     })
 
+    it('initially there are 5 events', () => {
+        render( <EventList/> )
+
+        const events = screen.getAllByRole('listitem')
+        
+        expect(events.length).toBeGreaterThan(4)
+    })
+
 })

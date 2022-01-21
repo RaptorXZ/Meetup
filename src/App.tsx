@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import EventList from './EventList'
+import EventList from './components/EventList'
 
 function App() {
   return (
