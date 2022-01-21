@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Events } from '../models/Events'
+import karaoke from '../images/karaoke.jpg'
+import food from '../images/food.jpg'
+import concert from '../images/concert.jpg'
+import gaming from '../images/gaming.jpg'
+import painting from '../images/painting.jpg'
 
 const data: Events[] = [
     {
         id: nanoid(),
+        image: karaoke,
         eventName: 'Karaoke for coders',
-        interests: ['Coding', 'Singing'],
+        interests: ['Coding', 'Singing', 'Tech'],
         description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.',
         location: 'Gothenburg',
         date: '12/3/2022',
@@ -15,43 +21,47 @@ const data: Events[] = [
     },
     {
         id: nanoid(),
-        eventName: 'Karaoke for coders',
-        interests: ['Coding', 'Singing'],
+        image: concert,
+        eventName: 'Awesome concert',
+        interests: ['OnLocation', 'Singing', 'Music', 'Theatre'],
         description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.',
-        location: 'Gothenburg',
-        date: '12/3/2022',
-        time: '18:00',
-        hostName: 'Daniel_1212'
+        location: 'Gothenburg, Pusterviksgatan 3',
+        date: '15/3/2022',
+        time: '20:00',
+        hostName: 'JoJo'
     },
     {
         id: nanoid(),
-        eventName: 'Karaoke for coders',
-        interests: ['Coding', 'Singing'],
+        image: food,
+        eventName: 'Dinner Time',
+        interests: ['OnLocation', 'Food'],
         description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.',
-        location: 'Gothenburg',
-        date: '12/3/2022',
-        time: '18:00',
-        hostName: 'Daniel_1212'
+        location: 'Gothenburg, Andra Lång',
+        date: '22/3/2022',
+        time: '18:30',
+        hostName: 'Daniel1212'
     },
     {
         id: nanoid(),
-        eventName: 'Karaoke for coders',
-        interests: ['Coding', 'Singing'],
+        image: gaming,
+        eventName: 'CS Tournament',
+        interests: ['Tech', 'Gaming'],
         description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.',
-        location: 'Gothenburg',
-        date: '12/3/2022',
-        time: '18:00',
-        hostName: 'Daniel_1212'
+        location: 'Stockholm',
+        date: '2/2/2022',
+        time: '13:00',
+        hostName: 'the_tournament_host'
     },
     {
         id: nanoid(),
-        eventName: 'Karaoke for coders',
-        interests: ['Coding', 'Singing'],
+        image: painting,
+        eventName: 'Painting Meetup',
+        interests: ['Art', 'Theatre', 'OnLocation'],
         description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.',
-        location: 'Gothenburg',
-        date: '12/3/2022',
-        time: '18:00',
-        hostName: 'Daniel_1212'
+        location: 'Gothenburg, Änggårdsgatan 46',
+        date: '24/1/2022',
+        time: '16:30',
+        hostName: 'julie_arts'
     }
 ]
 
@@ -62,8 +72,8 @@ function EventList() {
             <ul>
                 {eventList.map(event => (   
                     <li key={event.id}>
-
                         <h3>{event.eventName}</h3>
+                        <img src={event.image} alt={event.eventName} height="150px" />
                         <p>{event.date}</p>
                         <p>{event.time}</p>
                         <p>{event.hostName}</p>

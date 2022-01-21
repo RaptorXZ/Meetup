@@ -2,6 +2,7 @@
 
 export interface Events {
     id: string
+    image: string
     eventName: string
     hostName: string
     location: string
