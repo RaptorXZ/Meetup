@@ -66,20 +66,22 @@ const data: Events[] = [
 ]
 
 function EventList() {
-    const [eventList, setEventList] = useState<Events[]>(data)
+    const [events, setEvents] = useState<Events[]>(data)
 
     return (
             <ul>
-                {eventList.map(event => (   
-                    <li key={event.id}>
-                        <h3>{event.eventName}</h3>
+                {events.map(event => (   
+                    <li key={event.id} data-testid={'event' + event.id}>
+                        <label id="eventname-label">Eventname</label>
+                        <h3 aria-labelledby="eventname-label">{event.eventName}</h3>
                         <img src={event.image} alt={event.eventName} height="150px" />
                         <p>{event.date}</p>
                         <p>{event.time}</p>
                         <p>{event.hostName}</p>
 
+                        <label id="interest-label">Interest</label>
                         {event.interests.map(interest => (
-                            <p>{interest}</p>
+                            <p aria-labelledby="interest-label">{interest}</p>
                         ))}
 
                     </li>
