@@ -1,3 +1,40 @@
 .App {
   text-align: center;
 }
+
+body {
+  background-color: #271748;
+}
+
+header {
+  background-color: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 3em;
+}
+
+header button {
+  background-color: inherit;
+  border: none;
+}
+
+p {
+  color: white;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  color: #F834A9;
+}
+
+footer {
+  background-color: #140A28;
+}
+
+li {
+  list-style: none;
+}
+
+label {
+  display: none;
+}
