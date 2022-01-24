@@ -17,10 +17,10 @@ describe('EventPage component', () => {
         expect(eventDetails).not.toBeInTheDocument()
     })
 
-    it('When the user clicks on an event the correct event details become visible', () => {
+    it('When the user clicks on a specific event the correct event details become visible', () => {
         render(<EventList/>)
-        const eventName = 'Painting Meetup'
-        const eventDesc = 'Are you intrested in art and love painting? Then this is the event for you!'
+        const eventName = 'Karaoke for coders'
+        const eventDesc = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.'
 
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)
@@ -33,10 +33,6 @@ describe('EventPage component', () => {
 
         const correctDesc = within(eventDetails).getByText(eventDesc)
         expect(correctDesc).toBeInTheDocument()
-
-        const incorrectName = within(eventDetails).getByText('Dinner Time')
-        expect(incorrectName).not.toBeInTheDocument()
-
     })
 
     // it('When the user clicks on an event the correct information is shown about the event', () => {
