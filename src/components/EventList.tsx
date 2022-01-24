@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Events } from '../models/Events'
+import EventDetails from './EventDetails'
 import karaoke from '../images/karaoke.jpg'
 import food from '../images/food.jpg'
 import concert from '../images/concert.jpg'
@@ -57,7 +58,7 @@ const data: Events[] = [
         image: painting,
         eventName: 'Painting Meetup',
         interests: ['Art', 'Theatre', 'OnLocation'],
-        description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.',
+        description: 'Are you intrested in art and love painting? Then this is the event for you!',
         location: 'Gothenburg, Änggårdsgatan 46',
         date: '24/1/2022',
         time: '16:30',
@@ -67,11 +68,21 @@ const data: Events[] = [
 
 function EventList() {
     const [eventList, setEventList] = useState<Events[]>(data)
+    const [showDetails, setShowDetails] = useState(false)
+
+    // const eventClickHandler = (eventList: any, EventDetails: any) => {
+    //     if(eventList.key !== EventDetails.data.id){
+    //         setShowDetails(!showDetails)
+    //     } else {
+    //         setShowDetails(showDetails)
+    //     }
+    // } 
+    // () => eventClickHandler(eventList, EventDetails)
 
     return (
             <ul>
-                {eventList.map(event => (   
-                    <li key={event.id}>
+                {eventList.map(event => ( 
+                    <li key={event.id} onClick={() => setShowDetails(!showDetails)}>
                         <h3>{event.eventName}</h3>
                         <img src={event.image} alt={event.eventName} height="150px" />
                         <p>{event.date}</p>
@@ -81,9 +92,13 @@ function EventList() {
                         {event.interests.map(interest => (
                             <p>{interest}</p>
                         ))}
-
-                    </li>
+                    </li>                
                 ))}
+
+                {showDetails ? 
+                <EventDetails eventDetails={data} id={'data[].id'} />
+                : null}
+               
             </ul>
     )
 }
