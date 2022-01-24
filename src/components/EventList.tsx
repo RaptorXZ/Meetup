@@ -69,12 +69,15 @@ const data: Events[] = [
 function EventList() {
     const [events, setEvents] = useState<Events[]>(data)
     const [showDetails, setShowDetails] = useState(false)
+    const [chosenId, setChosenId] = useState('')
 
     const eventClickHandler = (events: any, eventId: Events['id']) => {
         if(events.key !== eventId){
             setShowDetails(!showDetails)
+            setChosenId(eventId)
         } else if(events.key === eventId) {
             setShowDetails(showDetails)
+            setChosenId(eventId)
         } else {
             console.log('sorry we cant find your event')
         }
@@ -99,11 +102,7 @@ function EventList() {
                 ))}
 
                 {showDetails ? 
-                events.map(event => (
-                    <li id={event.id}>
-                        <EventDetails eventDetails={data} id={event.id} />
-                    </li>
-                ))
+                        <EventDetails eventDetails={data} id={chosenId} />
                 : null}
                
             </ul>

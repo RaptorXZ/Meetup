@@ -81,9 +81,6 @@ describe('EventPage component', () => {
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)
 
-        //const [button] = screen.getAllByText('Attend')
-        //userEvent.click(button)
-
         const commentfield = screen.queryByText('Discuss this meetup')
 
         expect(commentfield).toBeNull()
