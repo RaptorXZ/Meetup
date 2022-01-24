@@ -43,4 +43,59 @@ describe('EventPage component', () => {
     //     render(<EventList/>)
 
     // })
+
+    it('renders the signup button after the user clicks on an event', () => {
+        render(<EventList/>)
+        const [event] = screen.getAllByRole('listitem')
+        userEvent.click(event)
+
+        const [button] = screen.getAllByText('Attend')
+        expect(button).toBeInTheDocument()
+    })
+
+    it('signs the user up after clicking on the attend button', () => {
+        render(<EventList/>)
+        const [event] = screen.getAllByRole('listitem')
+        userEvent.click(event)
+
+        const [button] = screen.getAllByText('Attend')
+        userEvent.click(button)
+
+        expect(button).toHaveTextContent('Signed up!')
+    })
+
+    it('withdraws the users signup after clicking on the attend button twice', () => {
+        render(<EventList/>)
+        const [event] = screen.getAllByRole('listitem')
+        userEvent.click(event)
+
+        const [button] = screen.getAllByText('Attend')
+        userEvent.click(button)
+        userEvent.click(button)
+
+        expect(button).toHaveTextContent('Attend')
+    })
+
+    it('does not show comments on events initially', () => {
+        render(<EventList/>)
+        const [event] = screen.getAllByRole('listitem')
+        userEvent.click(event)
+
+        const commentfield = screen.queryByText('Discuss this meetup')
+
+        expect(commentfield).toBeNull()
+    })
+
+    it('renders comments on an event after the user clicks on the attend button', () => {
+        render(<EventList/>)
+        const [event] = screen.getAllByRole('listitem')
+        userEvent.click(event)
+
+        const [button] = screen.getAllByText('Attend')
+        userEvent.click(button)
+
+        const commentfield = screen.queryByText('Discuss this meetup')
+
+        expect(commentfield).toBeInTheDocument()
+    })
 })

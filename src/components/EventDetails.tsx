@@ -12,13 +12,24 @@ const EventPage = ({eventDetails, id}: Props) => {
     // const profile = Data.filter(profile => profile.title === title)
     
     // let updatedPlaylist = playlists.map((playlist) => {
-        //     if(playlist.id == id) {
-            //       playlist.ids = playlist.ids.filter((id) => (id.id != playlist.id))
-            //     }
+    //     if(playlist.id == id) {
+    //       playlist.ids = playlist.ids.filter((id) => (id.id != playlist.id))
+    //     }
+
+    const [attending, setAttending] = useState(false)
             
             const filterDetails = eventDetails.filter(filterDetails => filterDetails.id === id) // === id
 /*             console.log(filterDetails) */
             console.log(id)
+
+    const attendClickHandler = () => {
+        if(attending) {
+            setAttending(false)
+        }
+        else {
+            setAttending(true)
+        }
+    }
 
     return(
         <div role="eventDetails">
@@ -31,6 +42,12 @@ const EventPage = ({eventDetails, id}: Props) => {
                         <p>{details.hostName}</p>
                     <img src={details.image} alt={details.eventName} height="150px" />
                     <p>{details.description}</p>
+                    <button onClick={ () => attendClickHandler()}> {attending ? 'Signed up!' : 'Attend'}</button>
+                    { attending ?
+                        <section>
+                            <p>Discuss this meetup</p>
+                        </section>
+                    : null }
                     {details.interests.map(interest => (
                             <p aria-labelledby="interest-label">{interest}</p>
                         ))}

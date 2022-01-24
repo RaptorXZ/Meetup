@@ -81,7 +81,7 @@ function EventList() {
         } else {
             console.log('sorry we cant find your event')
         }
-    } 
+    }
 
     return (
             <ul>
