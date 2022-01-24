@@ -4,12 +4,7 @@ import './interests.css'
 
 function Interests() {
 	const [toggleButton, setToggleButton] = useState(-1) 
-	const interests: string[] = ['Art', 'Food', 'Sports', 'Coding', 'Theatre', 'Movies', 'Gaming', 'Literature', 'Singing', 'Photography', 'Online', 'OnLocation', 'Tech']
-
-	//sätt className för en specifik knapp (nu väljs alla knappar smatidigt vid onClick)
-	//get index of button find the one that matches in  a loop
-	//event.target
-	
+	const interests: string[] = ['Art', 'Food', 'Sports', 'Coding', 'Theatre', 'Movies', 'Gaming', 'Literature', 'Singing', 'Photography', 'Online', 'OnLocation', 'Tech', 'Music']
 
 	function handleClick(index: any) {
 		console.log('index: ', index)

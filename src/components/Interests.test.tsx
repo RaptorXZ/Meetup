@@ -54,9 +54,23 @@ describe('Interests component', () => {
 
 		expect(techButton).toHaveClass('interestButton unChosen')
 	})
+
+	it('tests that a interest is saved to the user when the press a specific button', () => {
+		render( <Interests/> )
+
+		const musicButton = screen.getByRole('button', {name: 'Music'})
+		const codingButton = screen.getByRole('button', {name: 'Coding'})
+
+		userEvent.click(musicButton)
+
+		userEvent.click(codingButton)
+
+		expect(musicButton).toHaveClass('interestButton chosen')
+
+	})
 })
 
-// Testa att ett intresse blir tillagt om knappen klickas på en gång
+
 // Testa att ett intresse blir borttaget om knappen klickas på två gånger
 // Testa att event med ett specifikt intresse renderas först i listan med event om användaren har valt intresset
 // Lägg till en uppgift
