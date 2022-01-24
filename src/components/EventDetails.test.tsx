@@ -8,7 +8,7 @@ describe('EventPage component', () => {
     const details: any = []
 
     it('component renders without crashing', () => {
-        render( <EventDetails eventDetails={details} id={''} /> )
+        render( <EventDetails eventDetails={details} id={details} /> )
     })
 
     it('the event details is not visible initially', () => {

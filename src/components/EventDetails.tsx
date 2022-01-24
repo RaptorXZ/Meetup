@@ -16,7 +16,7 @@ const EventPage = ({eventDetails, id}: Props) => {
     //       playlist.ids = playlist.ids.filter((id) => (id.id != playlist.id))
     //     }
 
-    const filterDetails = eventDetails.filter(filterDetails => filterDetails.id ) // === id
+    const filterDetails = eventDetails.filter(filterDetails => filterDetails.id === id) // === id
     console.log(filterDetails)
 
     return(

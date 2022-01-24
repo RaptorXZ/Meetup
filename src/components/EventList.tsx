@@ -70,19 +70,21 @@ function EventList() {
     const [eventList, setEventList] = useState<Events[]>(data)
     const [showDetails, setShowDetails] = useState(false)
 
-    // const eventClickHandler = (eventList: any, EventDetails: any) => {
-    //     if(eventList.key !== EventDetails.data.id){
-    //         setShowDetails(!showDetails)
-    //     } else {
-    //         setShowDetails(showDetails)
-    //     }
-    // } 
-    // () => eventClickHandler(eventList, EventDetails)
+    const eventClickHandler = (eventList: any, eventId: Events['id']) => {
+        if(eventList.key !== eventId){
+            setShowDetails(!showDetails)
+        } else if(eventList.key === eventId) {
+            setShowDetails(showDetails)
+        } else {
+            console.log('sorry we cant find your event')
+        }
+    } 
+   
 
     return (
             <ul>
-                {eventList.map(event => ( 
-                    <li key={event.id} onClick={() => setShowDetails(!showDetails)}>
+                {eventList.map((event) => ( 
+                    <li key={event.id} onClick={ () => eventClickHandler(eventList, event.id)}>
                         <h3>{event.eventName}</h3>
                         <img src={event.image} alt={event.eventName} height="150px" />
                         <p>{event.date}</p>
@@ -96,7 +98,11 @@ function EventList() {
                 ))}
 
                 {showDetails ? 
-                <EventDetails eventDetails={data} id={'data[].id'} />
+                eventList.map(event => (
+                    <li id={event.id}>
+                        <EventDetails eventDetails={data} id={event.id} />
+                    </li>
+                ))
                 : null}
                
             </ul>
