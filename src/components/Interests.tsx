@@ -17,8 +17,8 @@ function Interests() {
 	}
 
 	return (
-		<div>
-			<ul>
+		<div className='allButtons'>
+			<ul className='interestButton-list'>
 				{interests.map( (interest, index) => (
 					<li key={index}>
 						<button onClick={() => handleClick(index)} key={interest} data-testid='interest-button' 

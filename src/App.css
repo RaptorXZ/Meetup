@@ -11,7 +11,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 3em;
+  margin: 3em 3em 0 3em;
 }
 
 header button {

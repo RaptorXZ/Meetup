@@ -1,7 +1,34 @@
 .unChosen {
- background-color: #F834A9;
+ 	background-color: #F834A9;
 }
 
 .chosen{
 	background-color: rgb(61, 177, 192);
+}
+
+.allButtons{
+	display: flex;
+	justify-content: center;
+}
+
+.interestButton-list{
+	max-width: 1000px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.interestButton{
+	padding: 1rem 2rem;
+	margin: 0.5rem;
+	border: none;
+	border-radius: 3px;
+}
+
+.interestButton:hover{
+	cursor: pointer;
+	background-color: #3483f8;;
+	color: #fff;
 }
