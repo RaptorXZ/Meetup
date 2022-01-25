@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Events } from '../models/Events'
+import Commentsection from './CommentSection'
 
 interface Props{
     eventDetails: Events[]
@@ -53,9 +54,7 @@ const EventPage = ({eventDetails, id}: Props) => {
                     <p>{details.description}</p>
                     <button onClick={ () => attendClickHandler()}> {attending ? 'Signed up!' : 'Attend'}</button>
                     { attending ?
-                        <section>
-                            <p>Discuss this meetup</p>
-                        </section>
+                        < Commentsection />
                     : null }
                     {details.interests.map(interest => (
                             <p aria-labelledby="interest-label">{interest}</p>
