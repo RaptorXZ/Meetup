@@ -48,7 +48,7 @@ const EventPage = ({eventDetails, id}: Props) => {
                     <button onClick={ () => attendClickHandler()}> {attending ? 'Signed up!' : 'Attend'}</button>
 
                     { attending ?
-                        < Commentsection />
+                        < Commentsection id={id} />
                     : null }
 
                     {details.interests.map(interest => (
