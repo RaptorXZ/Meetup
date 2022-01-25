@@ -7,6 +7,7 @@ import food from '../images/food.jpg'
 import concert from '../images/concert.jpg'
 import gaming from '../images/gaming.jpg'
 import painting from '../images/painting.jpg'
+import './EventList.css'
 
 const data: Events[] = [
     {
@@ -77,39 +78,61 @@ function EventList() {
             setShowDetails(!showDetails)
             setShowList(!showList)
             setChosenId(eventId)
-        } else if(events.key === eventId) {
-            setShowDetails(showDetails)
-            setShowList(showList)
-            setChosenId(eventId)
+            } else if(events.key === eventId) {
+                setShowDetails(showDetails)
+                setShowList(showList)
+                setChosenId(eventId)
         } else {
             console.log('sorry we cant find your event')
         }
     }
 
+    const closeEventClickHandler = () => {
+        setShowList(!showList)
+        setShowDetails(!showDetails)
+    }
+
     return (
             <ul>
                 {showList ? (
-                    <div>
+                    <div className='event-list'>
                         {events.map(event => (   
-                            <li key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
+                            <li className='event' key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
+
+                                <div>
                                 <label id="eventname-label">Eventname</label>
                                 <h3 aria-labelledby="eventname-label">{event.eventName}</h3>
+                                <div>
                                 <img src={event.image} alt={event.eventName} height="150px" />
-                                <p>{event.date}</p>
-                                <p>{event.time}</p>
-                                <p>{event.hostName}</p>
-        
+                                </div>
+                                </div>
+
+
+                                <div className='all-paragraph'>
+                                <div>
+                                <p>{event.date}, {event.time}</p>
+                                <p>{event.location}</p>
+                                </div>
+
+                                <div className='interest-list'>
                                 <label id="interest-label">Interest</label>
                                 {event.interests.map(interest => (
-                                    <p aria-labelledby="interest-label">{interest}</p>
+                                        <p className='interest-paragraph' aria-labelledby="interest-label">{interest},</p>
                                 ))}
+                                </div>
+                                <p>{event.hostName}</p>
+                                </div>
+
                             </li>                
                         ))}
                     </div>
                     ) : null}
 
                 {showDetails ? 
-                        <EventDetails eventDetails={data} id={chosenId} />
+                <div>
+                    <button onClick={closeEventClickHandler}>close</button>
+                    <EventDetails eventDetails={data} id={chosenId} />
+                </div>
                 : null}
                
             </ul>

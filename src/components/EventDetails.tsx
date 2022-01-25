@@ -36,7 +36,6 @@ const EventPage = ({eventDetails, id}: Props) => {
             {filterDetails.map(details => (
 
                 <section key={details.id}>
-                    <button>close</button>
                     <h3>{details.eventName}</h3>
                         <p>{details.date}</p>
                         <p>{details.time}</p>
