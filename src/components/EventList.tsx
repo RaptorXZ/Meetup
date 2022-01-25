@@ -69,14 +69,17 @@ const data: Events[] = [
 function EventList() {
     const [events, setEvents] = useState<Events[]>(data)
     const [showDetails, setShowDetails] = useState(false)
+    const [showList, setShowList] = useState(true)
     const [chosenId, setChosenId] = useState('')
 
     const eventClickHandler = (events: any, eventId: Events['id']) => {
         if(events.key !== eventId){
             setShowDetails(!showDetails)
+            setShowList(!showList)
             setChosenId(eventId)
         } else if(events.key === eventId) {
             setShowDetails(showDetails)
+            setShowList(showList)
             setChosenId(eventId)
         } else {
             console.log('sorry we cant find your event')
@@ -85,21 +88,25 @@ function EventList() {
 
     return (
             <ul>
-                {events.map(event => (   
-                    <li key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
-                        <label id="eventname-label">Eventname</label>
-                        <h3 aria-labelledby="eventname-label">{event.eventName}</h3>
-                        <img src={event.image} alt={event.eventName} height="150px" />
-                        <p>{event.date}</p>
-                        <p>{event.time}</p>
-                        <p>{event.hostName}</p>
-
-                        <label id="interest-label">Interest</label>
-                        {event.interests.map(interest => (
-                            <p aria-labelledby="interest-label">{interest}</p>
+                {showList ? (
+                    <div>
+                        {events.map(event => (   
+                            <li key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
+                                <label id="eventname-label">Eventname</label>
+                                <h3 aria-labelledby="eventname-label">{event.eventName}</h3>
+                                <img src={event.image} alt={event.eventName} height="150px" />
+                                <p>{event.date}</p>
+                                <p>{event.time}</p>
+                                <p>{event.hostName}</p>
+        
+                                <label id="interest-label">Interest</label>
+                                {event.interests.map(interest => (
+                                    <p aria-labelledby="interest-label">{interest}</p>
+                                ))}
+                            </li>                
                         ))}
-                    </li>                
-                ))}
+                    </div>
+                    ) : null}
 
                 {showDetails ? 
                         <EventDetails eventDetails={data} id={chosenId} />
