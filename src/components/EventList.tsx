@@ -10,7 +10,7 @@ import painting from '../images/painting.jpg'
 
 const data: Events[] = [
     {
-        id: nanoid(),
+        id: 'sfhdfghdfg',
         image: karaoke,
         eventName: 'Karaoke for coders',
         interests: ['Coding', 'Singing', 'Tech'],
@@ -21,7 +21,7 @@ const data: Events[] = [
         hostName: 'Daniel_1212'
     },
     {
-        id: nanoid(),
+        id: 'rtrhjrghfgh',
         image: concert,
         eventName: 'Awesome concert',
         interests: ['OnLocation', 'Singing', 'Music', 'Theatre'],
@@ -32,7 +32,7 @@ const data: Events[] = [
         hostName: 'JoJo'
     },
     {
-        id: nanoid(),
+        id: 'cnfbcvfvfg',
         image: food,
         eventName: 'Dinner Time',
         interests: ['OnLocation', 'Food'],
@@ -43,7 +43,7 @@ const data: Events[] = [
         hostName: 'david1337'
     },
     {
-        id: nanoid(),
+        id: 'fghtrhythtg',
         image: gaming,
         eventName: 'CS Tournament',
         interests: ['Tech', 'Gaming'],
@@ -54,7 +54,7 @@ const data: Events[] = [
         hostName: 'the_tournament_host'
     },
     {
-        id: nanoid(),
+        id: 'bmhkjjkda',
         image: painting,
         eventName: 'Painting Meetup',
         interests: ['Art', 'Theatre', 'OnLocation'],

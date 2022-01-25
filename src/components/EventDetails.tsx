@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Events } from '../models/Events'
 
 interface Props{
@@ -9,6 +9,12 @@ interface Props{
 const EventPage = ({eventDetails, id}: Props) => {
 
     const [attending, setAttending] = useState(false)
+
+    useEffect(() => {
+        if(localStorage.getItem(id)) {
+            setAttending(true)
+        }
+    })
             
             const filterDetails = eventDetails.filter(filterDetails => filterDetails.id === id) // === id
             console.log(id)
@@ -16,9 +22,12 @@ const EventPage = ({eventDetails, id}: Props) => {
     const attendClickHandler = () => {
         if(attending) {
             setAttending(false)
+            localStorage.removeItem(id)
         }
         else {
             setAttending(true)
+            localStorage.setItem(id, id)
+
         }
     }
 
