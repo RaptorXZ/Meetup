@@ -8,14 +8,6 @@ interface Props{
 }
 
 const EventPage = ({eventDetails, id}: Props) => {
-    console.log(eventDetails, id) // eventDetails, id
-    // const { title } = useParams();
-    // const profile = Data.filter(profile => profile.title === title)
-    
-    // let updatedPlaylist = playlists.map((playlist) => {
-    //     if(playlist.id == id) {
-    //       playlist.ids = playlist.ids.filter((id) => (id.id != playlist.id))
-    //     }
 
     const [attending, setAttending] = useState(false)
 
@@ -26,7 +18,6 @@ const EventPage = ({eventDetails, id}: Props) => {
     })
             
             const filterDetails = eventDetails.filter(filterDetails => filterDetails.id === id) // === id
-/*             console.log(filterDetails) */
             console.log(id)
 
     const attendClickHandler = () => {
@@ -44,6 +35,7 @@ const EventPage = ({eventDetails, id}: Props) => {
     return(
         <div role="eventDetails">
             {filterDetails.map(details => (
+
                 <section key={details.id}>
                     <h3>{details.eventName}</h3>
                         <p>{details.date}</p>
@@ -52,13 +44,17 @@ const EventPage = ({eventDetails, id}: Props) => {
                         <p>{details.hostName}</p>
                     <img src={details.image} alt={details.eventName} height="150px" />
                     <p>{details.description}</p>
+
                     <button onClick={ () => attendClickHandler()}> {attending ? 'Signed up!' : 'Attend'}</button>
+
                     { attending ?
                         < Commentsection />
                     : null }
+
                     {details.interests.map(interest => (
-                            <p aria-labelledby="interest-label">{interest}</p>
-                        ))}
+                        <p aria-labelledby="interest-label">{interest}</p>
+                    ))}
+
                 </section>
             ))}
         </div>
