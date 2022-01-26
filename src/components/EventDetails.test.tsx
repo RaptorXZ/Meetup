@@ -59,17 +59,6 @@ describe('EventPage component', () => {
         expect(button).toBeInTheDocument()
     })
 
-    it('signs the user up after clicking on the attend button', () => {
-        render(<EventList/>)
-        const [event] = screen.getAllByRole('listitem')
-        userEvent.click(event)
-
-        const [button] = screen.getAllByText('Attend')
-        userEvent.click(button)
-
-        expect(button).toHaveTextContent('Signed up!')
-    })
-
     it('withdraws the users signup after clicking on the attend button twice', () => {
         render(<EventList/>)
         const [event] = screen.getAllByRole('listitem')
@@ -90,6 +79,18 @@ describe('EventPage component', () => {
         const commentfield = screen.queryByText('Discuss this meetup')
 
         expect(commentfield).toBeNull()
+    })
+
+    it('signs the user up after clicking on the attend button', () => {
+        render(<EventList/>)
+        const [event] = screen.getAllByRole('listitem')
+        userEvent.click(event)
+
+        const [button] = screen.getAllByText('Attend')
+        userEvent.click(button)
+
+        expect(button).toHaveTextContent('Signed up!')
+        userEvent.click(button)
     })
 
     it('renders comments on an event after the user clicks on the attend button', () => {

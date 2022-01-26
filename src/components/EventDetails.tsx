@@ -18,8 +18,8 @@ const EventPage = ({eventDetails, id}: Props) => {
         }
     })
             
-            const filterDetails = eventDetails.filter(filterDetails => filterDetails.id === id) // === id
-            console.log(id)
+    const filterDetails = eventDetails.filter(filterDetails => filterDetails.id === id) // === id
+    console.log(id)
 
     const attendClickHandler = () => {
         if(attending) {
@@ -29,7 +29,6 @@ const EventPage = ({eventDetails, id}: Props) => {
         else {
             setAttending(true)
             localStorage.setItem(id, id)
-
         }
     }
 
@@ -45,7 +44,7 @@ const EventPage = ({eventDetails, id}: Props) => {
                     <img src={details.image} alt={details.eventName} height="150px" />
                     <p>{details.description}</p>
 
-                    <button onClick={ () => attendClickHandler()}> {attending ? 'Signed up!' : 'Attend'}</button>
+                    <button onClick={ () => attendClickHandler()}>{attending?'Signed up!':'Attend'}</button>
 
                     { attending ?
                         < Commentsection id={id} />

@@ -16,9 +16,11 @@ describe('CommentSection component', () => {
 
         // Get the comment input field
         const input = screen.getByRole('textbox')
-        // Simulate keyboard event to input a comment
-        // Simulate enter
+        // Simulate keyboard event to input a comment and simulate enter
+        userEvent.type(input, 'Great event!' + '{enter}')
         // Query an element with the text we inputted
+        const newComment = screen.getByText('Great event!')
+        expect(newComment).toBeInTheDocument()
     })
 
 })
