@@ -34,7 +34,7 @@ describe('Interests component', () => {
 		)
 	})
 
-	it('tests that a specific button is chosen after being clicked', () => {
+	it('chooses a specific button when the user clicked on it', () => {
 		render( <Interests/> )
 
 		const artButton = screen.getByRole('button', {name: 'Art'})	
@@ -44,7 +44,7 @@ describe('Interests component', () => {
 		expect(artButton).toHaveClass('interestButton chosen')		
 	})
 
-	it('tests that the Tech-button stays unchosen when you click the Art-button', () => {
+	it('does not save Tech as an interest when the user clicks the Art-button', () => {
 		render( <Interests/> )
 
 		const artButton = screen.getByRole('button', {name: 'Art'})
@@ -55,22 +55,31 @@ describe('Interests component', () => {
 		expect(techButton).toHaveClass('interestButton unChosen')
 	})
 
-	it('tests that a interest is saved to the user when the press a specific button', () => {
+	it('saves the user interest when the press a specific button', () => {
 		render( <Interests/> )
 
 		const musicButton = screen.getByRole('button', {name: 'Music'})
 		const codingButton = screen.getByRole('button', {name: 'Coding'})
 
 		userEvent.click(musicButton)
-
 		userEvent.click(codingButton)
 
 		expect(musicButton).toHaveClass('interestButton chosen')
+		expect(codingButton).toHaveClass('interestButton chosen')
+	})
 
+	it('removes an interest when the user clicks on it for the second time', () => {
+		render( <Interests/> )
+
+		const onLocationButton = screen.getByRole('button', {name: 'OnLocation'})
+
+		userEvent.click(onLocationButton)
+		userEvent.click(onLocationButton)
+
+		expect(onLocationButton).toHaveClass('interestButton unChosen')
 	})
 })
 
 
-// Testa att ett intresse blir borttaget om knappen klickas på två gånger
 // Testa att event med ett specifikt intresse renderas först i listan med event om användaren har valt intresset
-// Lägg till en uppgift
+
