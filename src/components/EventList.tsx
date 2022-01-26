@@ -8,6 +8,7 @@ import concert from '../images/concert.jpg'
 import gaming from '../images/gaming.jpg'
 import painting from '../images/painting.jpg'
 import './EventList.css'
+import CreateEvent from './createAndEdit/CreateEvent'
 
 const data: Events[] = [
     {
@@ -72,6 +73,7 @@ function EventList() {
     const [showDetails, setShowDetails] = useState(false)
     const [showList, setShowList] = useState(true)
     const [chosenId, setChosenId] = useState('')
+    const [newEvent, setNewEvent] = useState('')
 
     const eventClickHandler = (events: any, eventId: Events['id']) => {
         if(events.key !== eventId){
@@ -92,13 +94,20 @@ function EventList() {
         setShowDetails(!showDetails)
     }
 
+
     return (
             <ul>
+
+                
+                <CreateEvent events={data[0]}/>
+                
+               
+
                 {showList ? (
                     <div className='event-list'>
                         {events.map(event => (   
-                            <li className='event' key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
 
+                            <li className='event' key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
                                 <div>
                                 <label id="eventname-label">Eventname</label>
                                 <h3 aria-labelledby="eventname-label">{event.eventName}</h3>
