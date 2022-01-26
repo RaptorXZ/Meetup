@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { Events } from '../models/Events'
 import Commentsection from './CommentSection'
-
 import './EventDetails.css'
+
 interface Props{
     eventDetails: Events[]
     id: Events['id']
