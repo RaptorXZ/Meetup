@@ -2,13 +2,23 @@ import {render, screen, within} from '@testing-library/react'
 import userEvent from "@testing-library/user-event"
 import EventDetails from './EventDetails'
 import EventList from './EventList'
+import { Events } from '../models/Events'
 
 describe('EventPage component', () => {
 
-    const details: any = []
+    const details: Events = { 
+        id: 'bmhkjjkda',
+        image: 'image',
+        eventName: 'Painting Meetup',
+        interests: ['Art', 'Theatre', 'OnLocation'],
+        description: 'Are you intrested in art and love painting? Then this is the event for you!',
+        location: 'Gothenburg, Änggårdsgatan 46',
+        date: '24/1/2022',
+        time: '16:30',
+        hostName: 'julie_arts'}
 
     it('component renders without crashing', () => {
-        render( <EventDetails eventDetails={details} id={details} /> )
+        render( <EventDetails eventDetails={[details]} id={details.id} /> )
     })
 
     it('the event details is not visible initially', () => {

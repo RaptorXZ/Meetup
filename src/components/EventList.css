@@ -9,7 +9,7 @@
     align-items: flex-start;
 }
 
-li:hover{
+.event:hover{
     cursor: pointer;
     background-color: #361e66;;
     border-radius: 6px;

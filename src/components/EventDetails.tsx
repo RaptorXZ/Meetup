@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Events } from '../models/Events'
 import Commentsection from './CommentSection'
 
+import './EventDetails.css'
 interface Props{
     eventDetails: Events[]
     id: Events['id']
@@ -33,9 +34,8 @@ const EventPage = ({eventDetails, id}: Props) => {
     }
 
     return(
-        <div role="eventDetails">
+        <div role="eventDetails" className="eventDetails">
             {filterDetails.map(details => (
-
                 <section key={details.id}>
                     <h3>{details.eventName}</h3>
                         <p>{details.date}</p>
