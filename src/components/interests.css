@@ -1,9 +1,9 @@
 .unChosen {
- 	background-color: #F834A9;
+ 	background-color: #d32f91b4;
 }
 
 .chosen{
-	background-color: #bd408bb4;
+	background-color: #F834A9;
 }
 
 .allButtons{
@@ -29,6 +29,6 @@
 
 .interestButton:hover{
 	cursor: pointer;
-	background-color: #3483f8;;
+	background-color: #7450bd;
 	color: #fff;
 }
