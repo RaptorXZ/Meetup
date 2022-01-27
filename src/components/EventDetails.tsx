@@ -19,7 +19,6 @@ const EventPage = ({eventDetails, id}: Props) => {
     })
             
     const filterDetails = eventDetails.filter(filterDetails => filterDetails.id === id) // === id
-    console.log(id)
 
     const attendClickHandler = () => {
         if(attending) {

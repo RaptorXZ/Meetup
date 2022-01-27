@@ -6,15 +6,24 @@ interface Props {
 
 function CommentSection(event: Props) {
 
-    console.log('Event ID for comment section is ' + event.id)
+    //console.log('Event ID for comment section is ' + event.id)
 
     useEffect(() => {
         // Add comments from localstorage using event.id
         if(localStorage.getItem('comments'+event.id)) {
-            console.log()
-            const para: HTMLParagraphElement = document.createElement("p")
-            para.innerHTML = localStorage.getItem('comments'+event.id) as string
-            document.getElementById("commentsection")?.appendChild(para)
+
+            let comments: Array<string>
+            const storedComments = localStorage.getItem('comments'+event.id)
+            if(storedComments) {
+                try {
+                    comments = JSON.parse(storedComments)
+                    comments.forEach(element => {
+                        const para: HTMLParagraphElement = document.createElement("p")
+                        para.innerHTML = element
+                        document.getElementById("commentsection")?.appendChild(para)
+                    })
+                } catch (e) {}
+            }
         }
     })
 
@@ -24,7 +33,7 @@ function CommentSection(event: Props) {
         const user: string = 'David1337'
 
         // Make sure the input field is not empty
-        if (newcomment == "") {
+        if (newcomment === "") {
             //alert("Type something first!");
             return
         }
@@ -33,9 +42,24 @@ function CommentSection(event: Props) {
             para.innerHTML = user + ': ' + newcomment
             document.getElementById("commentsection")?.appendChild(para)
             document.forms[0]["comment"].value = ''
-
             // Save comment to localstorage with event.id
-            localStorage.setItem('comments'+event.id, para.innerHTML)
+            storeComment(user + ': ' + newcomment)
+        }
+    }
+
+    function storeComment(comment: string) {
+
+        let comments: Array<string> | null = []
+        const storedComments = localStorage.getItem('comments'+event.id)
+        if(storedComments) {
+            try {
+                comments = JSON.parse(storedComments)
+                comments?.push(comment)
+                localStorage.setItem('comments'+event.id, JSON.stringify(comments))
+            } catch (e) { console.log('Failed to store another comment, overwriting') }
+        }
+        else {
+            localStorage.setItem('comments'+event.id, JSON.stringify([comment]))
         }
     }
 
