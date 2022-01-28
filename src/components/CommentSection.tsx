@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+const { createComment, storeComment } = require('./commentAndStore/createComment')
 
 interface Props {
     id: string
@@ -12,16 +13,19 @@ function CommentSection(event: Props) {
         // Add comments from localstorage using event.id
         if(localStorage.getItem('comments'+event.id)) {
 
+            // If comments have already been rendered and the component remounts, do not create duplicate comments
+            if((document.getElementById("commentsection")?.children.length || 0) > 1) { return }
+
             let comments: Array<string>
             const storedComments = localStorage.getItem('comments'+event.id)
             if(storedComments) {
                 try {
-                    comments = JSON.parse(storedComments)
-                    comments.forEach(element => {
-                        const para: HTMLParagraphElement = document.createElement("p")
-                        para.innerHTML = element
-                        document.getElementById("commentsection")?.appendChild(para)
-                    })
+                        comments = JSON.parse(storedComments)
+                        comments.forEach(element => {
+                            const para: HTMLParagraphElement = document.createElement("p")
+                            para.innerHTML = element
+                            document.getElementById("commentsection")?.appendChild(para)
+                        })
                 } catch (e) {}
             }
         }
@@ -29,7 +33,7 @@ function CommentSection(event: Props) {
 
     const submitComment = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const newcomment: string = document.forms[0]["comment"].value;
+        const newcomment: string = document.forms[0]["comment"].value || '';
         const user: string = 'David1337'
 
         // Make sure the input field is not empty
@@ -38,13 +42,25 @@ function CommentSection(event: Props) {
             return
         }
         else {
+            /*
             const para = document.createElement("p")
             para.innerHTML = user + ': ' + newcomment
             document.getElementById("commentsection")?.appendChild(para)
             document.forms[0]["comment"].value = ''
+            */
+            createComment(newcomment, user)
             // Save comment to localstorage with event.id
-            storeComment(user + ': ' + newcomment)
+            storeComment(user + ': ' + newcomment, event.id)
+            // Clear the input field
+            document.forms[0]["comment"].value = ''
         }
+    }
+/*
+    function createComment(comment: string, user: string) {
+        const para = document.createElement("p")
+        para.innerHTML = user + ': ' + comment
+        document.getElementById("commentsection")?.appendChild(para)
+        document.forms[0]["comment"].value = ''
     }
 
     function storeComment(comment: string) {
@@ -62,7 +78,7 @@ function CommentSection(event: Props) {
             localStorage.setItem('comments'+event.id, JSON.stringify([comment]))
         }
     }
-
+*/
     return (
         <section>
             <p>Discuss this meetup</p>

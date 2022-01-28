@@ -3,23 +3,24 @@ import userEvent from "@testing-library/user-event"
 import CommentSection from './CommentSection'
 import EventDetails from './EventDetails'
 import EventList from './EventList'
+const { createComment } = require('./commentAndStore/createComment')
 
 describe('CommentSection component', () => {
 
-    it('adds a new comment when user inputs something into the comment field and presses enter', () => {
+    it('adds a new comment and renders it to screen', () => {
         render(<EventList/>)
+        
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)
 
         const [button] = screen.getAllByText('Attend')
         userEvent.click(button)
+        
+        const testdata: string = "Great event!"
+        const testuser: string = "HappyMike"
+        createComment(testdata, testuser)
 
-        // Get the comment input field
-        const input = screen.getByRole('textbox')
-        // Simulate keyboard event to input a comment and simulate enter
-        userEvent.type(input, 'Great event!' + '{enter}')
-        // Query an element with the text we inputted
-        const newComment = screen.getByText('Great event!')
+        const newComment = screen.getByText(testuser + ': ' + testdata)
         expect(newComment).toBeInTheDocument()
     })
 
