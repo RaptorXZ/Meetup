@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { nanoid } from 'nanoid';
+import React, { useState, useEffect } from 'react';
 import { Events } from '../models/Events'
 import EventDetails from './EventDetails'
 import karaoke from '../images/karaoke.jpg'
@@ -68,12 +67,64 @@ const data: Events[] = [
     }
 ]
 
+
 function EventList() {
     const [events, setEvents] = useState<Events[]>(data)
     const [showDetails, setShowDetails] = useState(false)
     const [showList, setShowList] = useState(true)
     const [chosenId, setChosenId] = useState('')
-    const [newEvent, setNewEvent] = useState('')
+
+
+    const addEvent = (newEvent: Events) => {
+            const newArr = [...events, newEvent]
+            console.log(newArr)
+            setEvents(newArr)
+        console.log('amount of events', events.length)
+    }
+
+   console.log(events)
+
+    useEffect( () => {
+        let storage: any //Array<string> | null = []
+        const stored = localStorage.getItem('meetup-storage')
+        if (stored !== null) {
+        try {
+        storage = JSON.parse(stored)
+        console.log(storage)
+        setEvents(storage)
+        } catch (e) { console.log('error') } 
+        }
+	
+	}, [])
+
+
+    useEffect( () => {
+        localStorage.setItem('meetup-storage', JSON.stringify(events))
+    }, [events])
+
+
+
+
+    // useEffect( () => {
+    //     let storage: Array<object> | null = []
+    //     let meetupStorage = localStorage.getItem('meetup-storage')
+    //     console.log('storage', meetupStorage?.length)
+        
+    //     if(meetupStorage) {
+    //         try {
+    //             storage = JSON.parse(meetupStorage)
+    //             // setEvents(storage)
+    //             console.log(storage)
+    //         } catch(e) {
+    //             console.log('Failed to show meetups')
+    //         }
+    //     } else {
+    //         localStorage.setItem('meetups-storage', JSON.stringify(events))
+    //     }
+    // }, [])
+
+   
+
 
     const eventClickHandler = (events: any, eventId: Events['id']) => {
         if(events.key !== eventId){
@@ -98,15 +149,12 @@ function EventList() {
     return (
             <ul>
 
-                
-                <CreateEvent events={data[0]}/>
-                
+                <CreateEvent events={data} addEvent={addEvent}/>
                
-
                 {showList ? (
-                    <div className='event-list'>
+                    <div id='event' className='event-list'>
                         {events.map(event => (   
-
+                            
                             <li className='event' key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
                                 <div>
                                 <label id="eventname-label">Eventname</label>

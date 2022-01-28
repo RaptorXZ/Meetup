@@ -1,19 +1,20 @@
 import { nanoid } from "nanoid"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Events } from '../../models/Events'
 import './CreateEvent.css'
 
 interface Props{
-    events: Events
+    events: Events[]
+    addEvent: (newEvent: Events) => void
 }
 
-const CreateEvent = ({events}: Props) => {
+const CreateEvent = ({events, addEvent}: Props) => {
     const [showForm, setShowForm] = useState(false)
-    const [meetup, setMeetup] = useState([events])
+    const [meetup, setMeetup] = useState(events)
 
     const [eventName, setEventName] = useState('')
     const [image, setImage] = useState('')
-    const [interest, setInterest] = useState([''])
+    const [interest, setInterest] = useState(['']) //add check boxes for interests
     const [description, setDescription] = useState('')
     const [location, setLocation] = useState('')
     const [date, setDate] = useState('')
@@ -33,17 +34,37 @@ const CreateEvent = ({events}: Props) => {
     hostName: hostName
     }
 
-    // console.log(newMeetup)
-
     const showFormClickHandler = () => {
         setShowForm(!showForm)
     }
 
-    const saveMeetupClickHandler = () => {
+    const submitMeetup = () => {
         const newMeetupArr = [...meetup, newMeetup]
         setMeetup(newMeetupArr)
-        console.log(...meetup)
-        console.log(newMeetupArr)
+        addEvent(newMeetup)
+        storeNewMeetup(newMeetup)
+
+        // console.log(newMeetupArr)
+        console.log(newMeetup)
+        console.log(meetup)
+    }
+
+    
+    const storeNewMeetup = (newMeetup: object) => {
+        let allNewMeetups: Array<object> | null = []
+        let meetupStorage = localStorage.getItem('meetup-storage')
+
+        if(meetupStorage) {
+            try {
+                allNewMeetups = JSON.parse(meetupStorage)
+                allNewMeetups?.push(newMeetup)
+                localStorage.setItem('meetup-storage', JSON.stringify(allNewMeetups))
+            } catch(e) {
+                console.log('Failed to store new meetup')
+            }
+        } else {
+            localStorage.setItem('meetup-storage', JSON.stringify(newMeetup))
+        }
     }
 
 
@@ -79,7 +100,7 @@ const CreateEvent = ({events}: Props) => {
 
                 </form> 
 
-            <button onClick={() => saveMeetupClickHandler()}>save meetup</button>
+            <button onClick={() => submitMeetup()}>save meetup</button>
 
             </div>)
             : null}
