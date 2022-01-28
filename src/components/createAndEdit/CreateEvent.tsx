@@ -39,14 +39,11 @@ const CreateEvent = ({events, addEvent}: Props) => {
     }
 
     const submitMeetup = () => {
-        const newMeetupArr = [...meetup, newMeetup]
-        setMeetup(newMeetupArr)
+        // const newMeetupArr = [...meetup, newMeetup]
+        // setMeetup(newMeetupArr)
         addEvent(newMeetup)
         storeNewMeetup(newMeetup)
-
-        // console.log(newMeetupArr)
         console.log(newMeetup)
-        console.log(meetup)
     }
 
     

@@ -45,8 +45,6 @@ const EventPage = ({eventDetails, id}: Props) => {
         }
     }
 
-    console.log(events)
-
     return(
         <div role="eventDetails" className="eventDetails">
             {filterDetails.map(details => (
