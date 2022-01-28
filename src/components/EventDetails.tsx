@@ -32,12 +32,8 @@ const EventPage = ({eventDetails, id}: Props) => {
 	
 	}, [])
             
-<<<<<<< HEAD
-    const filterDetails = eventDetails.filter(filterDetails => filterDetails.id === id) // === id
-=======
-            const filterDetails = events.filter(filterDetails => filterDetails.id === id) // === id
-            console.log(id)
->>>>>>> createEvent
+    const filterDetails = events.filter(filterDetails => filterDetails.id === id) // === id
+    console.log(id)
 
     const attendClickHandler = () => {
         if(attending) {
