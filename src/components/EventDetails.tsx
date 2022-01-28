@@ -11,14 +11,29 @@ interface Props{
 const EventPage = ({eventDetails, id}: Props) => {
 
     const [attending, setAttending] = useState(false)
+    const [events, setEvents] = useState(eventDetails)
 
     useEffect(() => {
         if(localStorage.getItem(id)) {
             setAttending(true)
         }
     })
+
+    useEffect( () => {
+        let storage: any //Array<string> | null = []
+        const stored = localStorage.getItem('meetup-storage')
+        if (stored !== null) {
+        try {
+        storage = JSON.parse(stored)
+        console.log(storage)
+        setEvents(storage)
+        } catch (e) { console.log('error') } 
+        }
+	
+	}, [])
             
-    const filterDetails = eventDetails.filter(filterDetails => filterDetails.id === id) // === id
+    const filterDetails = events.filter(filterDetails => filterDetails.id === id) // === id
+    console.log(id)
 
     const attendClickHandler = () => {
         if(attending) {
