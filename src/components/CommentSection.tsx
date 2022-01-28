@@ -7,8 +7,6 @@ interface Props {
 
 function CommentSection(event: Props) {
 
-    //console.log('Event ID for comment section is ' + event.id)
-
     useEffect(() => {
         // Add comments from localstorage using event.id
         if(localStorage.getItem('comments'+event.id)) {
@@ -42,12 +40,6 @@ function CommentSection(event: Props) {
             return
         }
         else {
-            /*
-            const para = document.createElement("p")
-            para.innerHTML = user + ': ' + newcomment
-            document.getElementById("commentsection")?.appendChild(para)
-            document.forms[0]["comment"].value = ''
-            */
             createComment(newcomment, user)
             // Save comment to localstorage with event.id
             storeComment(user + ': ' + newcomment, event.id)
@@ -55,30 +47,7 @@ function CommentSection(event: Props) {
             document.forms[0]["comment"].value = ''
         }
     }
-/*
-    function createComment(comment: string, user: string) {
-        const para = document.createElement("p")
-        para.innerHTML = user + ': ' + comment
-        document.getElementById("commentsection")?.appendChild(para)
-        document.forms[0]["comment"].value = ''
-    }
 
-    function storeComment(comment: string) {
-
-        let comments: Array<string> | null = []
-        const storedComments = localStorage.getItem('comments'+event.id)
-        if(storedComments) {
-            try {
-                comments = JSON.parse(storedComments)
-                comments?.push(comment)
-                localStorage.setItem('comments'+event.id, JSON.stringify(comments))
-            } catch (e) { console.log('Failed to store another comment, overwriting') }
-        }
-        else {
-            localStorage.setItem('comments'+event.id, JSON.stringify([comment]))
-        }
-    }
-*/
     return (
         <section>
             <p>Discuss this meetup</p>
