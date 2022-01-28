@@ -79,10 +79,10 @@ function EventList() {
             const newArr = [...events, newEvent]
             console.log(newArr)
             setEvents(newArr)
-        console.log('amount of events', events.length)
+        // console.log('amount of events', events.length)
     }
 
-   console.log(events)
+//    console.log(events)
 
     useEffect( () => {
         let storage: any //Array<string> | null = []
@@ -101,30 +101,6 @@ function EventList() {
     useEffect( () => {
         localStorage.setItem('meetup-storage', JSON.stringify(events))
     }, [events])
-
-
-
-
-    // useEffect( () => {
-    //     let storage: Array<object> | null = []
-    //     let meetupStorage = localStorage.getItem('meetup-storage')
-    //     console.log('storage', meetupStorage?.length)
-        
-    //     if(meetupStorage) {
-    //         try {
-    //             storage = JSON.parse(meetupStorage)
-    //             // setEvents(storage)
-    //             console.log(storage)
-    //         } catch(e) {
-    //             console.log('Failed to show meetups')
-    //         }
-    //     } else {
-    //         localStorage.setItem('meetups-storage', JSON.stringify(events))
-    //     }
-    // }, [])
-
-   
-
 
     const eventClickHandler = (events: any, eventId: Events['id']) => {
         if(events.key !== eventId){
