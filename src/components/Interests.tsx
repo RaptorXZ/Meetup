@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react'
 import './interests.css'
 
-
 function Interests() {
 	const interests: string[] = ['Art', 'Food', 'Sports', 'Coding', 'Theatre', 'Movies', 'Gaming', 'Literature', 'Singing', 'Photography', 'Online', 'OnLocation', 'Tech', 'Music']
 	const [userInterests, setUserInterests] = useState<string[]>([])

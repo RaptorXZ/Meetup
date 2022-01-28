@@ -67,6 +67,7 @@ const data: Events[] = [
     }
 ]
 
+
 function EventList() {
     const [events, setEvents] = useState<Events[]>(data)
     const [showDetails, setShowDetails] = useState(false)
@@ -97,8 +98,8 @@ function EventList() {
                 {showList ? (
                     <div className='event-list'>
                         {events.map(event => (   
-                            <li className='event' key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
-
+                            <li className='event' key={event.id} data-testid={'event' + event.id} data-testingID="listitem-events"  onClick={ () => eventClickHandler(events, event.id)}>
+								 {/* data-testid={'event' + event.id} */}
                                 <div>
                                 <label id="eventname-label">Eventname</label>
                                 <h3 aria-labelledby="eventname-label">{event.eventName}</h3>

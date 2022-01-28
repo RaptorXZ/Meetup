@@ -80,6 +80,5 @@ describe('Interests component', () => {
 	})
 })
 
-
 // Testa att event med ett specifikt intresse renderas först i listan med event om användaren har valt intresset
 

@@ -1,4 +1,5 @@
 import { render, screen, queryByText, within } from '@testing-library/react'
+import Interests from './Interests'
 import EventList from './EventList'
 
 describe('EventList component', () => {
