@@ -30,7 +30,7 @@ describe('EventPage component', () => {
     it('When the user clicks on a specific event the correct event details become visible', () => {
         render(<EventList/>)
         const eventName = 'Karaoke for coders'
-        const eventDesc = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.'
+        const eventDesc = "Are you unsure whether you are better at singing or programming? Or perhaps you have always wondered what Rick Astley's 'Never Gonna Give You Up' would sound like in binary? Come to Karaoke for Coders and find out!"
 
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)

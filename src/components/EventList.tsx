@@ -15,7 +15,7 @@ const data: Events[] = [
         image: karaoke,
         eventName: 'Karaoke for coders',
         interests: ['Coding', 'Singing', 'Tech'],
-        description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.',
+        description: "Are you unsure whether you are better at singing or programming? Or perhaps you have always wondered what Rick Astley's 'Never Gonna Give You Up' would sound like in binary? Come to Karaoke for Coders and find out!",
         location: 'Gothenburg',
         date: '12/3/2022',
         time: '18:00',
@@ -26,29 +26,29 @@ const data: Events[] = [
         image: concert,
         eventName: 'Awesome concert',
         interests: ['OnLocation', 'Singing', 'Music', 'Theatre'],
-        description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.',
+        description: "You might never have heard of the Thundering Llamas, or our unique rendition of Metallica's 'Nothing Else Matters', but it's not too late to change!",
         location: 'Gothenburg, Pusterviksgatan 3',
         date: '15/3/2022',
         time: '20:00',
-        hostName: 'JoJo'
+        hostName: 'Thundering_Llamas'
     },
     {
         id: 'cnfbcvfvfg',
         image: food,
         eventName: 'Dinner Time',
         interests: ['OnLocation', 'Food'],
-        description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.',
+        description: "A great chance to get to know some new people and try out some great food! No couples!",
         location: 'Gothenburg, Andra Lång',
         date: '22/3/2022',
         time: '18:30',
-        hostName: 'david1337'
+        hostName: 'hungry_frog'
     },
     {
         id: 'fghtrhythtg',
         image: gaming,
         eventName: 'CS Tournament',
         interests: ['Tech', 'Gaming'],
-        description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.',
+        description: "Noobs and pros welcome. Teams of 5. Viewers also welcome. Participation is free, viewers pay $5 entry. Bring your own tech.",
         location: 'Stockholm',
         date: '2/2/2022',
         time: '13:00',
@@ -117,7 +117,7 @@ function EventList() {
                                 <div className='interest-list'>
                                 <label id="interest-label">Interest</label>
                                 {event.interests.map(interest => (
-                                        <p className='interest-paragraph' aria-labelledby="interest-label">{interest},</p>
+                                        <p className='interest-paragraph' aria-labelledby="interest-label">{interest}</p>
                                 ))}
                                 </div>
                                 <p>{event.hostName}</p>
