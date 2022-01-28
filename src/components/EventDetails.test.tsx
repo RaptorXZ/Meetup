@@ -15,7 +15,8 @@ describe('EventPage component', () => {
         location: 'Gothenburg, Änggårdsgatan 46',
         date: '24/1/2022',
         time: '16:30',
-        hostName: 'julie_arts'}
+        hostName: 'julie_arts'
+    }
 
     it('component renders without crashing', () => {
         render( <EventDetails eventDetails={[details]} id={details.id} /> )
@@ -44,11 +45,6 @@ describe('EventPage component', () => {
         const correctDesc = within(eventDetails).getByText(eventDesc)
         expect(correctDesc).toBeInTheDocument()
     })
-
-    // it('When the user clicks on an event the correct information is shown about the event', () => {
-    //     render(<EventList/>)
-
-    // })
 
     it('renders the signup button after the user clicks on an event', () => {
         render(<EventList/>)

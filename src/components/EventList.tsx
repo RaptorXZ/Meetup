@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { nanoid } from 'nanoid';
+import React, { useState, useEffect } from 'react';
 import { Events } from '../models/Events'
 import EventDetails from './EventDetails'
 import karaoke from '../images/karaoke.jpg'
@@ -8,6 +7,7 @@ import concert from '../images/concert.jpg'
 import gaming from '../images/gaming.jpg'
 import painting from '../images/painting.jpg'
 import './EventList.css'
+import CreateEvent from './createAndEdit/CreateEvent'
 
 const data: Events[] = [
     {
@@ -67,11 +67,40 @@ const data: Events[] = [
     }
 ]
 
+
 function EventList() {
     const [events, setEvents] = useState<Events[]>(data)
     const [showDetails, setShowDetails] = useState(false)
     const [showList, setShowList] = useState(true)
     const [chosenId, setChosenId] = useState('')
+
+
+    const addEvent = (newEvent: Events) => {
+            const newArr = [...events, newEvent]
+            console.log(newArr)
+            setEvents(newArr)
+        // console.log('amount of events', events.length)
+    }
+
+//    console.log(events)
+
+    useEffect( () => {
+        let storage: any //Array<string> | null = []
+        const stored = localStorage.getItem('meetup-storage')
+        if (stored !== null) {
+        try {
+        storage = JSON.parse(stored)
+        console.log(storage)
+        setEvents(storage)
+        } catch (e) { console.log('error') } 
+        }
+	
+	}, [])
+
+
+    useEffect( () => {
+        localStorage.setItem('meetup-storage', JSON.stringify(events))
+    }, [events])
 
     const eventClickHandler = (events: any, eventId: Events['id']) => {
         if(events.key !== eventId){
@@ -92,13 +121,17 @@ function EventList() {
         setShowDetails(!showDetails)
     }
 
+
     return (
             <ul>
-                {showList ? (
-                    <div className='event-list'>
-                        {events.map(event => (   
-                            <li className='event' key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
 
+                <CreateEvent events={data} addEvent={addEvent}/>
+               
+                {showList ? (
+                    <div id='event' className='event-list'>
+                        {events.map(event => (   
+                            
+                            <li className='event' key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
                                 <div>
                                 <label id="eventname-label">Eventname</label>
                                 <h3 aria-labelledby="eventname-label">{event.eventName}</h3>
