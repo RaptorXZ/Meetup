@@ -36,6 +36,7 @@ describe('create event component', () => {
 
     it('saves the new meetup event after user clicks button "save meetup"', () => {
         render(<CreateEvent events={[details]} addEvent={mockAddEvent}/>)
+        render(<EventList/>)
 
         const createButton = screen.getByRole('button', {name: 'create meetup'})
         userEvent.click(createButton)
@@ -45,7 +46,6 @@ describe('create event component', () => {
         userEvent.type(input as HTMLElement, 'example name')
         userEvent.click(saveButton)
 
-        render(<EventList/>)
         const savedMeetup = screen.getByText('example name')
         expect(savedMeetup).toBeInTheDocument()
     })

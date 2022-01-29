@@ -125,7 +125,8 @@ function EventList() {
     return (
             <ul>
 
-                <CreateEvent events={data} addEvent={addEvent}/>
+                {showList && ( <CreateEvent events={data} addEvent={addEvent}/> ) }
+                
                
                 {showList ? (
                     <div id='event' className='event-list'>

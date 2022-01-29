@@ -1,6 +1,16 @@
 import { nanoid } from "nanoid"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Events } from '../../models/Events'
+import karaoke from '../../images/karaoke.jpg'
+import food from '../../images/food.jpg'
+import concert from '../../images/concert.jpg'
+import gaming from '../../images/gaming.jpg'
+import painting from '../../images/painting.jpg'
+import coding from '../../images/coding.jpg'
+import literature from '../../images/literature.jpg'
+import movies from '../../images/movies.jpg'
+import photography from '../../images/photography.jpg'
+import sports from '../../images/sports.jpg'
 import './CreateEvent.css'
 
 interface Props{
@@ -12,9 +22,9 @@ const CreateEvent = ({events, addEvent}: Props) => {
     const [showForm, setShowForm] = useState(false)
     const [meetup, setMeetup] = useState(events)
     const cehckInterest: string[] = ['Art', 'Food', 'Sports', 'Coding', 'Theatre', 'Movies', 'Gaming', 'Literature', 'Singing', 'Photography', 'Online', 'OnLocation', 'Tech', 'Music']
-
+    const photoArray: string[] = [literature, movies, photography, sports, karaoke, food, concert, gaming, painting, coding]
     const [eventName, setEventName] = useState('')
-    const [image, setImage] = useState('')
+    const [image, setImage] = useState<string>('')
     const [interest, setInterest] = useState<string[]>([]) //add check boxes for interests
     const [description, setDescription] = useState('')
     const [location, setLocation] = useState('')
@@ -77,23 +87,6 @@ const CreateEvent = ({events, addEvent}: Props) => {
     }
 
 
-    // const handleImageChange = function (e: React.ChangeEvent<HTMLInputElement>) {
-    //     const fileList = e.target.files
-    
-    //     if (!fileList) return;
-        
-    //     setImage(fileList[0]);
-    //   };
-
-    // const uploadFile = function (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) {
-    //     if (image) {
-    //         const formData = new FormData();
-    //         formData.append("image", image, image.name)
-    //     }
-    // }
-    // handleImageChange uploadFile
-
-
     return(
         <div>
             <button onClick={showFormClickHandler}>create meetup</button>
@@ -133,9 +126,17 @@ const CreateEvent = ({events, addEvent}: Props) => {
                     </label>
                 ))}
 
-                <label htmlFor="image">Upload a photo:
+                {photoArray.map((photo) => (
+                    <div>
+                        <img src={photo} alt='' height="50px" />
+                            <input type="radio" name="meetup" value={photo} onChange={(e) => setImage(e.target.value)} />
+                    </div>
+                    
+                ))}
+
+                {/* <label htmlFor="image">Upload a photo:
                 <input type="file" accept="image/*"  onChange={(e) => setImage(e.target.value)} />             
-                </label>
+                </label> */}
 
                 </form> 
 
