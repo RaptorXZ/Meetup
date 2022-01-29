@@ -33,11 +33,8 @@ describe('App', () => {
 
 			const events = screen.getAllByTestId('listitem-events')
 
-			console.log('event-list; ', events[1].textContent)
-
 			expect(events[0]).toHaveTextContent(/Karaoke for coders/i)
 			expect(events[1]).toHaveTextContent(/CS Tournament/i)
 		})
-		
 	})
 })

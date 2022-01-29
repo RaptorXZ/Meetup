@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { Events } from '../models/Events'
 import EventDetails from './EventDetails'
@@ -19,7 +19,8 @@ const data: Events[] = [
         location: 'Gothenburg',
         date: '12/3/2022',
         time: '18:00',
-        hostName: 'Daniel_1212'
+        hostName: 'Daniel_1212', 
+		matches: 0
     },
     {
         id: 'rtrhjrghfgh',
@@ -30,7 +31,8 @@ const data: Events[] = [
         location: 'Gothenburg, Pusterviksgatan 3',
         date: '15/3/2022',
         time: '20:00',
-        hostName: 'JoJo'
+        hostName: 'JoJo', 
+		matches: 0
     },
     {
         id: 'cnfbcvfvfg',
@@ -41,7 +43,8 @@ const data: Events[] = [
         location: 'Gothenburg, Andra Lång',
         date: '22/3/2022',
         time: '18:30',
-        hostName: 'david1337'
+        hostName: 'david1337', 	
+		matches: 0
     },
     {
         id: 'fghtrhythtg',
@@ -52,7 +55,8 @@ const data: Events[] = [
         location: 'Stockholm',
         date: '2/2/2022',
         time: '13:00',
-        hostName: 'the_tournament_host'
+        hostName: 'the_tournament_host', 
+		matches: 0
     },
     {
         id: 'bmhkjjkda',
@@ -63,7 +67,8 @@ const data: Events[] = [
         location: 'Gothenburg, Änggårdsgatan 46',
         date: '24/1/2022',
         time: '16:30',
-        hostName: 'julie_arts'
+        hostName: 'julie_arts', 
+		matches: 0
     }
 ]
 
@@ -93,7 +98,37 @@ function EventList() {
         setShowDetails(!showDetails)
     }
 
+	function filterByUserInterests () {
+		let interestStorage: string[] = JSON.parse(localStorage.getItem('interestArray') || "")
+		
+		const filteredEvents = data.filter(meetup => {
+			for(let i = 0; i < interestStorage.length; i++) {
+				if(meetup.interests.includes(interestStorage[i])) {
+					console.log(meetup)
+					return true
+				}
+			}
+			return false
+		})
+
+		addToMatches()
+
+		function addToMatches() {
+			filteredEvents.forEach( meetup => {
+			  for(let i = 0; i < interestStorage.length; i++) {
+				 if(meetup.interests.includes(interestStorage[i])) {
+				   meetup.matches += 1
+				 } 
+			  } console.log('matches ' + meetup.matches)
+			})
+		  }
+		
+		
+	}
+
     return (
+			<div>
+				<button onClick={ () => filterByUserInterests() }>Sort by interest</button>
             <ul>
                 {showList ? (
                     <div className='event-list'>
@@ -107,7 +142,6 @@ function EventList() {
                                 <img src={event.image} alt={event.eventName} height="150px" />
                                 </div>
                                 </div>
-
 
                                 <div className='all-paragraph'>
                                 <div>
@@ -137,6 +171,7 @@ function EventList() {
                 : null}
                
             </ul>
+			</div>
     )
 }
 
