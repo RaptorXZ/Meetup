@@ -4,14 +4,23 @@ import './interests.css'
 function Interests() {
 	const interests: string[] = ['Art', 'Food', 'Sports', 'Coding', 'Theatre', 'Movies', 'Gaming', 'Literature', 'Singing', 'Photography', 'Online', 'OnLocation', 'Tech', 'Music']
 	const [userInterests, setUserInterests] = useState<string[]>([])
+	const [userInterestStorage, setUserInterestsStorage] = useState(JSON.parse(localStorage.getItem('interestArray') || '[]'))
+
+	console.log('userInterests', userInterests)
 
 	useEffect( () => {
 
 		if(userInterests.length > 0) {
 			console.log('userInterests global', userInterests)
 			localStorage.setItem('interestArray', JSON.stringify(userInterests))
+		} else if (userInterests.length === 0 ){
+			localStorage.setItem('interestArray', JSON.stringify([]))
 		}
 	}, [userInterests])
+
+	useEffect( () => {
+		setUserInterests(userInterestStorage)
+	}, [])
 
 
 	function handleClick(index: number, userInterest: string) {
@@ -26,8 +35,6 @@ function Interests() {
 			let interestsList = [...userInterests]
 			interestsList.splice(interestIndex, 1)
 			setUserInterests(interestsList) 
-			console.log('user interests', userInterests)
-			console.log('after splice: ', interestsList)
 		}
 	}
 
