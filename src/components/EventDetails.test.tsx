@@ -15,7 +15,9 @@ describe('EventPage component', () => {
         location: 'Gothenburg, Änggårdsgatan 46',
         date: '24/1/2022',
         time: '16:30',
-        hostName: 'julie_arts'}
+        hostName: 'julie_arts',
+		matches: 0
+	}
 
     it('component renders without crashing', () => {
         render( <EventDetails eventDetails={[details]} id={details.id} /> )

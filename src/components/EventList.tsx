@@ -8,6 +8,7 @@ import concert from '../images/concert.jpg'
 import gaming from '../images/gaming.jpg'
 import painting from '../images/painting.jpg'
 import './EventList.css'
+import { JsxElement } from 'typescript';
 
 const data: Events[] = [
     {
@@ -78,6 +79,8 @@ function EventList() {
     const [showDetails, setShowDetails] = useState(false)
     const [showList, setShowList] = useState(true)
     const [chosenId, setChosenId] = useState('')
+	const [userInterests, setUserInterests] = useState(JSON.parse(localStorage.getItem('interestArray') || '[]'))
+	const [filteredEvents, setFilteredEvents] = useState([])
 
     const eventClickHandler = (events: any, eventId: Events['id']) => {
         if(events.key !== eventId){
@@ -99,67 +102,78 @@ function EventList() {
     }
 
 	function filterByUserInterests () {
-		let interestStorage: string[] = JSON.parse(localStorage.getItem('interestArray') || "")
+		console.log('in filtering function')
 		
-		const filteredEvents = data.filter(meetup => {
-			for(let i = 0; i < interestStorage.length; i++) {
-				if(meetup.interests.includes(interestStorage[i])) {
-					console.log(meetup)
+		const filterEvents: any = data.filter(event => {
+			for(let i = 0; i < userInterests.length; i++) {
+				if(event.interests.includes(userInterests[i])) {
+					console.log(event)
 					return true
 				}
 			}
 			return false
 		})
 
-		addToMatches()
+		setFilteredEvents(filterEvents) 
+		console.log(filteredEvents)
 
-		function addToMatches() {
-			filteredEvents.forEach( meetup => {
-			  for(let i = 0; i < interestStorage.length; i++) {
-				 if(meetup.interests.includes(interestStorage[i])) {
-				   meetup.matches += 1
-				 } 
-			  } console.log('matches ' + meetup.matches)
-			})
-		  }
-		
-		
+		// function addToMatches() {
+		// 	filteredEvents.forEach( event => {
+		// 	  for(let i = 0; i < userInterests.length; i++) {
+		// 		 if(event.interests.includes(userInterests[i])) {
+		// 		   event.matches += 1
+		// 		 } 
+		// 	  } console.log('matches ' + event.matches)
+		// 	})
+		//   }	
+
+		// addToMatches()
 	}
+ 
+	const eventsToShow = JSON.parse(localStorage.getItem('interestArray') || "[]").length === 0 
+	? events 
+	: events.filter(event => {
+		for(let i = 0; i < userInterests.length; i++) {
+			if(event.interests.includes(userInterests[i])) {
+				return true
+			}
+		}
+		return false
+	})
+		
 
     return (
 			<div>
-				<button onClick={ () => filterByUserInterests() }>Sort by interest</button>
-            <ul>
+            <ul> 
                 {showList ? (
-                    <div className='event-list'>
-                        {events.map(event => (   
-                            <li className='event' key={event.id} data-testid={'event' + event.id} data-testingID="listitem-events"  onClick={ () => eventClickHandler(events, event.id)}>
-								 {/* data-testid={'event' + event.id} */}
-                                <div>
-                                <label id="eventname-label">Eventname</label>
-                                <h3 aria-labelledby="eventname-label">{event.eventName}</h3>
-                                <div>
-                                <img src={event.image} alt={event.eventName} height="150px" />
-                                </div>
-                                </div>
+                    <div className='event-list'> 
+                    {(eventsToShow.map(event => (  
+					<li className='event' key={event.id} data-testid={'event' + event.id} data-testingID="listitem-events"  onClick={ () => eventClickHandler(events, event.id)}>
+						<div>
+						<label id="eventname-label">Eventname</label>
+						<h3 aria-labelledby="eventname-label">{event.eventName}</h3>
+						<div>
+						<img src={event.image} alt={event.eventName} height="150px" />
+						</div>
+						</div>
 
-                                <div className='all-paragraph'>
-                                <div>
-                                <p>{event.date}, {event.time}</p>
-                                <p>{event.location}</p>
-                                </div>
+						<div className='all-paragraph'>
+						<div>
+						<p>{event.date}, {event.time}</p>
+						<p>{event.location}</p>
+						</div>
 
-                                <div className='interest-list'>
-                                <label id="interest-label">Interest</label>
-                                {event.interests.map(interest => (
-                                        <p className='interest-paragraph' aria-labelledby="interest-label">{interest},</p>
-                                ))}
-                                </div>
-                                <p>{event.hostName}</p>
-                                </div>
+						<div className='interest-list'>
+						<label id="interest-label">Interest</label>
+						{event.interests.map(interest => (
+								<p className='interest-paragraph' aria-labelledby="interest-label">{interest},</p>
+						))}
+						</div>
+						<p>{event.hostName}</p>
+						</div>
 
-                            </li>                
-                        ))}
+					</li>                
+				)))}
                     </div>
                     ) : null}
 
