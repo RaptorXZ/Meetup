@@ -1,8 +1,14 @@
 import {render, screen, within} from '@testing-library/react'
 import userEvent from "@testing-library/user-event"
+import { useState } from 'react'
 import CreateEvent from './CreateEvent'
 import EventList from '../EventList'
 import { Events } from '../../models/Events'
+
+const Wrapper = () => {
+	const [userInterests, setUserInterests] = useState<string[]>([])
+	return <EventList userInterests={userInterests} />
+} 
 
 describe('create event component', () => {
 
@@ -15,7 +21,8 @@ describe('create event component', () => {
         location: 'Gothenburg, Änggårdsgatan 46',
         date: '24/1/2022',
         time: '16:30',
-        hostName: 'julie_arts'
+        hostName: 'julie_arts', 
+		matches: 0
     }
 
     let mockAddEvent: jest.Mock; //(newEvent: Events) => void;
@@ -36,7 +43,7 @@ describe('create event component', () => {
     })
 
     it('is not possible to save meetup if input fields are left empty and no checkboxes have been checked', () => {
-        render(<EventList/>)
+        render(<Wrapper/>)
 
         const createButton = screen.getByRole('button', {name: 'create meetup'})
         userEvent.click(createButton)
@@ -60,26 +67,28 @@ describe('create event component', () => {
     // it('saves the new meetup and it becomes visible in the list after user clicks button "save meetup"', async () => {
     //     render(<EventList/>)
     //     // render(<CreateEvent events={[details]} addEvent={mockAddEvent} />)
+    it('saves the new meetup and it becomes visible in the list after user clicks button "save meetup"', () => {
+        render(<Wrapper/>)
 
-    //     const createButton = screen.getByRole('button', {name: 'create meetup'})
-    //     userEvent.click(createButton)
+        const createButton = screen.getByRole('button', {name: 'create meetup'})
+        userEvent.click(createButton)
 
-    //     const saveButton = screen.getByRole('button', {name: 'save meetup'})
+        const saveButton = screen.getByRole('button', {name: 'save meetup'})
         
-    //     const [input] = screen.getAllByPlaceholderText('Type here...')
-    //     userEvent.type(input as HTMLElement, 'example greg')
-    //     userEvent.click(saveButton)
+        const [input] = screen.getAllByPlaceholderText('Type here...')
+        userEvent.type(input as HTMLElement, 'example greg')
+        userEvent.click(saveButton)
 
+        const events = screen.getAllByRole('listitem')
+        expect(events.length).toBeGreaterThan(5)
     //     const saved = screen.getByText('example greg')
 
     //     // const events = screen.getAllByRole('listitem')
-    //     // expect(events.length).toBeGreaterThan(5)
 
-    //     // const [events] = screen.getAllByRole('listitem')
 
     //     // const savedMeetup = within(events).getByText('example')
     //     expect(saved).toBeInTheDocument()
-    // })
+    })
 
 
     // it('closes the form and clears input fields and checkboxes after user clicks "save meetup"', () => {
@@ -107,5 +116,4 @@ describe('create event component', () => {
     //     // expect(form).not.toBeInTheDocument()
 
     // })
-
 })

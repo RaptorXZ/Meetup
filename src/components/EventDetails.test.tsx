@@ -1,8 +1,14 @@
 import {render, screen, within} from '@testing-library/react'
 import userEvent from "@testing-library/user-event"
+import { useState } from 'react'
 import EventDetails from './EventDetails'
 import EventList from './EventList'
 import { Events } from '../models/Events'
+
+const Wrapper = () => {
+	const [userInterests, setUserInterests] = useState<string[]>([])
+	return <EventList userInterests={userInterests} />
+} 
 
 describe('EventPage component', () => {
 
@@ -15,21 +21,22 @@ describe('EventPage component', () => {
         location: 'Gothenburg, Änggårdsgatan 46',
         date: '24/1/2022',
         time: '16:30',
-        hostName: 'julie_arts'
-    }
+        hostName: 'julie_arts',
+		matches: 0
+	}
 
     it('component renders without crashing', () => {
         render( <EventDetails eventDetails={[details]} id={details.id} /> )
     })
 
     it('the event details is not visible initially', () => {
-        render(<EventList/>)
+        render(<Wrapper/>)
         const eventDetails = screen.queryByRole('eventDetails')
         expect(eventDetails).not.toBeInTheDocument()
     })
 
     it('When the user clicks on a specific event the correct event details become visible', () => {
-        render(<EventList/>)
+        render(<Wrapper/>)
         const eventName = 'Karaoke for coders'
         const eventDesc = "Are you unsure whether you are better at singing or programming? Or perhaps you have always wondered what Rick Astley's 'Never Gonna Give You Up' would sound like in binary? Come to Karaoke for Coders and find out!"
 
@@ -47,7 +54,7 @@ describe('EventPage component', () => {
     })
 
     it('renders the signup button after the user clicks on an event', () => {
-        render(<EventList/>)
+        render(<Wrapper/>)
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)
 
@@ -55,8 +62,8 @@ describe('EventPage component', () => {
         expect(button).toBeInTheDocument()
     })
 
-    it('withdraws the users signup after clicking on the attend button twice', () => {
-        render(<EventList/>)
+    it('signs the user up after clicking on the attend button', () => {
+        render(<Wrapper/>)
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)
 
@@ -67,8 +74,8 @@ describe('EventPage component', () => {
         expect(button).toHaveTextContent('Attend')
     })
 
-    it('does not show comments on events initially', () => {
-        render(<EventList/>)
+    it('withdraws the users signup after clicking on the attend button twice', () => {
+        render(<Wrapper/>)
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)
 
@@ -77,8 +84,8 @@ describe('EventPage component', () => {
         expect(commentfield).toBeNull()
     })
 
-    it('signs the user up after clicking on the attend button', () => {
-        render(<EventList/>)
+    it('does not show comments on events initially', () => {
+		render(<Wrapper/>)
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)
 
@@ -90,7 +97,7 @@ describe('EventPage component', () => {
     })
 
     it('renders comments on an event after the user clicks on the attend button', () => {
-        render(<EventList/>)
+        render(<Wrapper/>)
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)
 

@@ -1,14 +1,20 @@
 import { render, screen, queryByText, within } from '@testing-library/react'
 import userEvent from "@testing-library/user-event"
+import { useState } from 'react'
 import CommentSection from './CommentSection'
 import EventDetails from './EventDetails'
 import EventList from './EventList'
 const { createComment } = require('./commentAndStore/createComment')
 
+const Wrapper = () => {
+	const [userInterests, setUserInterests] = useState<string[]>([])
+	return <EventList userInterests={userInterests} />
+} 
+
 describe('CommentSection component', () => {
 
     it('adds a new comment and renders it to screen', () => {
-        render(<EventList/>)
+        render(<Wrapper/>)
         
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)

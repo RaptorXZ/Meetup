@@ -1,23 +1,32 @@
 import{ render, screen } from '@testing-library/react'
+import { useState } from 'react'
 import userEvent  from '@testing-library/user-event'
 import Interests from './Interests'
+
+const Wrapper = () => {
+	const [userInterests, setUserInterests] = useState<string[]>([])
+	return <Interests userInterests={userInterests} setUserInterests={setUserInterests} />
+}
 
 describe('Interests component', () => {
 
 	it('renders without crashing', () => {
-		render( <Interests/> ) 
+		render(<Wrapper/>)
+		 
 	})
 
 	it('renders the list of interests', () => {
-		render( <Interests/> ) 
 
-		const list = screen.getByRole('list')
+		render(<Wrapper/>)
 
-		expect(list).toBeInTheDocument()
+			const list = screen.getByRole('list')
+
+			expect(list).toBeInTheDocument()
+
 	})
 	
 	it('shows the button with the text "Tech"', () => {
-		render( <Interests/> ) 
+		render( <Wrapper/> ) 
 
 		const button = screen.getByRole('button', {name: 'Tech'})
 
@@ -25,7 +34,7 @@ describe('Interests component', () => {
 	})
 
 	it('tests that all buttons are unChosen before they are clicked', () => {
-		render( <Interests/> )
+		render( <Wrapper/> )
 
 		const buttons = screen.getAllByTestId('interest-button')
 
@@ -35,7 +44,7 @@ describe('Interests component', () => {
 	})
 
 	it('chooses a specific button when the user clicked on it', () => {
-		render( <Interests/> )
+		render( <Wrapper/> )
 
 		const artButton = screen.getByRole('button', {name: 'Art'})	
 
@@ -45,7 +54,7 @@ describe('Interests component', () => {
 	})
 
 	it('does not save Tech as an interest when the user clicks the Art-button', () => {
-		render( <Interests/> )
+		render( <Wrapper/> )
 
 		const artButton = screen.getByRole('button', {name: 'Art'})
 		const techButton = screen.getByRole('button', {name: 'Tech'})		
@@ -56,7 +65,7 @@ describe('Interests component', () => {
 	})
 
 	it('saves the user interest when the press a specific button', () => {
-		render( <Interests/> )
+		render( <Wrapper/> )
 
 		const musicButton = screen.getByRole('button', {name: 'Music'})
 		const codingButton = screen.getByRole('button', {name: 'Coding'})
@@ -69,7 +78,7 @@ describe('Interests component', () => {
 	})
 
 	it('removes an interest when the user clicks on it for the second time', () => {
-		render( <Interests/> )
+		render( <Wrapper/> )
 
 		const onLocationButton = screen.getByRole('button', {name: 'OnLocation'})
 
@@ -80,6 +89,4 @@ describe('Interests component', () => {
 	})
 })
 
-
-// Testa att event med ett specifikt intresse renderas först i listan med event om användaren har valt intresset
 

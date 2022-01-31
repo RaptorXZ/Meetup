@@ -10,4 +10,5 @@ export interface Events {
     time: string
     description: string
     interests:string[]
+	matches: number
 }
