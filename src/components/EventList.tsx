@@ -73,13 +73,17 @@ const data: Events[] = [
     }
 ]
 
+interface Props {
+	userInterests: string[]
+	setUserInterests: (userInterests: string[]) => void
+}
 
-function EventList() {
+function EventList({userInterests, setUserInterests} : Props) {
     const [events, setEvents] = useState<Events[]>(data)
     const [showDetails, setShowDetails] = useState(false)
     const [showList, setShowList] = useState(true)
     const [chosenId, setChosenId] = useState('')
-	const [userInterests, setUserInterests] = useState(JSON.parse(localStorage.getItem('interestArray') || '[]'))
+	// const [userInterests, setUserInterests] = useState(JSON.parse(localStorage.getItem('interestArray') || '[]'))
 	const [filteredEvents, setFilteredEvents] = useState([])
 
     const eventClickHandler = (events: any, eventId: Events['id']) => {
@@ -130,7 +134,7 @@ function EventList() {
 		// addToMatches()
 	}
  
-	const eventsToShow = JSON.parse(localStorage.getItem('interestArray') || "[]").length === 0 
+	const eventsToShow = userInterests.length === 0 
 	? events 
 	: events.filter(event => {
 		for(let i = 0; i < userInterests.length; i++) {

@@ -3,18 +3,15 @@ import './App.css';
 import EventList from './components/EventList'
 import Header from './partials/Header'
 import Interests from './components/Interests';
-
-
+import {useState} from "react"
 
 function App() {
-
-
-	
+	const [userInterests, setUserInterests] = useState<string[]>([])
   return (
     <div className="App">
       <Header />
-	    <Interests />
-      <EventList />
+	    <Interests userInterests={userInterests} setUserInterests={setUserInterests}/>
+      <EventList userInterests={userInterests} setUserInterests={setUserInterests}/>
     </div>
   );
 }

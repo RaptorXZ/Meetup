@@ -1,9 +1,14 @@
 import {useState, useEffect} from 'react'
 import './interests.css'
 
-function Interests() {
+interface Props {
+	userInterests: string[]
+	setUserInterests: (userInterests: string[]) => void
+}
+
+function Interests({userInterests, setUserInterests} : Props) {
 	const interests: string[] = ['Art', 'Food', 'Sports', 'Coding', 'Theatre', 'Movies', 'Gaming', 'Literature', 'Singing', 'Photography', 'Online', 'OnLocation', 'Tech', 'Music']
-	const [userInterests, setUserInterests] = useState<string[]>([])
+	// const [userInterests, setUserInterests] = useState<string[]>([])
 	const [userInterestStorage, setUserInterestsStorage] = useState(JSON.parse(localStorage.getItem('interestArray') || '[]'))
 
 	console.log('userInterests', userInterests)
