@@ -213,7 +213,7 @@ function EventList({userInterests} : Props) {
 
                 {showDetails ? 
                 <div>
-                    <button onClick={closeEventClickHandler}>close</button>
+                    <button className="back-btn larger-text" onClick={closeEventClickHandler}>{'< Back to events'}</button>
                     <EventDetails eventDetails={data} id={chosenId} />
                 </div>
                 : null}

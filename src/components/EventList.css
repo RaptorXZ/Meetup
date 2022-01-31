@@ -47,3 +47,9 @@ p{
 .interest-paragraph{
     padding: 3px;
 }
+
+.back-btn {
+    background-color: inherit;
+    color: white;
+    border: none;
+}
