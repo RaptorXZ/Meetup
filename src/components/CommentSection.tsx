@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './CommentSection.css'
 const { createComment, storeComment } = require('./commentAndStore/createComment')
 
 interface Props {
@@ -49,12 +50,13 @@ function CommentSection(event: Props) {
     }
 
     return (
-        <section>
-            <p>Discuss this meetup</p>
-            <section id='commentsection'>
-                <form name="commentform" onSubmit={event => submitComment(event)}>
-                    <input type="text" id="comment" name="comment" placeholder="Share your thoughts about this meetup!" />
-                </form>
+        <section className="comment-wrapper">
+            <p className="larger-text comments-headline">Discuss this meetup</p>
+            <form name="commentform" onSubmit={event => submitComment(event)}>
+                <input type="text" id="comment" name="comment" placeholder="Share your thoughts about this meetup..." />
+            </form>
+            <section className="comment-section" id='commentsection'>
+                
             </section>
         </section>
     )

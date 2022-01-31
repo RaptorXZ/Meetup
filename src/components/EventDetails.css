@@ -1,1 +1,54 @@
 
+.details-interests {
+    justify-content: center;
+}
+.details-interests p {
+    margin: 0em .2em;
+    font-size: 1.4em;
+}
+
+.detail-image {
+    margin: auto;
+    margin-left: 0;
+    max-width: 100%;
+    height: auto;
+}
+
+.attend-btn {
+    font-size: 1.2em !important;
+    background-color: #F834A9;
+    border: none;
+    width: 23%;
+    margin: 1em 1em 1em 0em;
+    padding: .4em;
+}
+
+.left-column {
+    margin-left: 2em;
+}
+
+.right-column {
+    margin-top: 4em;
+}
+
+.event-date {
+    font-size: 1.6em;
+}
+
+.event-name {
+    font-size: 2.6em;
+    margin-bottom: 0;
+    margin-top: 0.5em;
+}
+
+.back-btn {
+    background-color: inherit;
+    color: white;
+    border: none;
+    font-size: 1.8em;
+    text-align: left;
+    justify-self: left;
+}
+.back-btn:hover {
+    color: #F834A9;
+}
