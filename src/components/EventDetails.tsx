@@ -20,14 +20,13 @@ const EventPage = ({eventDetails, id}: Props) => {
     })
 
     useEffect( () => {
-        let storage: any //Array<string> | null = []
+        let storage: [] = []
         const stored = localStorage.getItem('meetup-storage')
         if (stored !== null) {
-        try {
-        storage = JSON.parse(stored)
-        console.log(storage)
-        setEvents(storage)
-        } catch (e) { console.log('error') } 
+            try {
+                storage = JSON.parse(stored)
+                setEvents(storage)
+            } catch (e) { console.log('error') }
         }
 	
 	}, [])
@@ -49,25 +48,27 @@ const EventPage = ({eventDetails, id}: Props) => {
     return(
         <div role="eventDetails" className="eventDetails">
             {filterDetails.map(details => (
-                <section key={details.id}>
-                    <h3>{details.eventName}</h3>
-                        <p>{details.date}</p>
+                <section className="grid-horizontal-2" key={details.id}>
+                    <section className="flexbox-vertical width-50 align-left left-column">
+                        <h2 className="event-name">{details.eventName}</h2>
+                            <p className="larger-text">Host: {details.hostName}</p>
+                        <img className="detail-image" src={details.image} alt={details.eventName} height="150px" />
+                        <section className="flexbox-horizontal details-interests">
+                        {details.interests.map(interest => (
+                            <p aria-labelledby="interest-label">{interest}</p>
+                        ))}
+                        </section>
+                        { attending ?
+                            < Commentsection id={id} />
+                        : null }
+                    </section>
+                    <section className="flexbox-vertical width-50 align-left right-column larger-text">
+                        <p className="event-date">{details.date}</p>
                         <p>{details.time}</p>
                         <p>{details.location}</p>
-                        <p>{details.hostName}</p>
-                    <img src={details.image} alt={details.eventName} height="150px" />
-                    <p>{details.description}</p>
-
-                    <button onClick={ () => attendClickHandler()}>{attending?'Signed up!':'Attend'}</button>
-
-                    { attending ?
-                        < Commentsection id={id} />
-                    : null }
-
-                    {details.interests.map(interest => (
-                        <p aria-labelledby="interest-label">{interest}</p>
-                    ))}
-
+                        <p>{details.description}</p>
+                        <button className="attend-btn" onClick={ () => attendClickHandler()}>{attending?'Signed up!':'Attend'}</button>
+                    </section>
                 </section>
             ))}
         </div>

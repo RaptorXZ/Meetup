@@ -16,8 +16,8 @@ const data: Events[] = [
         eventName: 'Karaoke for coders',
         interests: ['Coding', 'Singing', 'Tech'],
         description: "Are you unsure whether you are better at singing or programming? Or perhaps you have always wondered what Rick Astley's 'Never Gonna Give You Up' would sound like in binary? Come to Karaoke for Coders and find out!",
-        location: 'Gothenburg',
-        date: '12/3/2022',
+        location: 'Gothenburg, Blåsvädergatan 21',
+        date: 'Friday, February 25, 2022',
         time: '18:00',
         hostName: 'Daniel_1212'
     },
@@ -28,7 +28,7 @@ const data: Events[] = [
         interests: ['OnLocation', 'Singing', 'Music', 'Theatre'],
         description: "You might never have heard of the Thundering Llamas, or our unique rendition of Metallica's 'Nothing Else Matters', but it's not too late to change!",
         location: 'Gothenburg, Pusterviksgatan 3',
-        date: '15/3/2022',
+        date: 'Tuesday, March 15, 2022',
         time: '20:00',
         hostName: 'Thundering_Llamas'
     },
@@ -39,7 +39,7 @@ const data: Events[] = [
         interests: ['OnLocation', 'Food'],
         description: "A great chance to get to know some new people and try out some great food! No couples!",
         location: 'Gothenburg, Andra Lång',
-        date: '22/3/2022',
+        date: 'Tuesday, March 22, 2022',
         time: '18:30',
         hostName: 'hungry_frog'
     },
@@ -50,7 +50,7 @@ const data: Events[] = [
         interests: ['Tech', 'Gaming'],
         description: "Noobs and pros welcome. Teams of 5. Viewers also welcome. Participation is free, viewers pay $5 entry. Bring your own tech.",
         location: 'Stockholm',
-        date: '2/2/2022',
+        date: 'Wednesday, February 2, 2022',
         time: '13:00',
         hostName: 'the_tournament_host'
     },
@@ -61,7 +61,7 @@ const data: Events[] = [
         interests: ['Art', 'Theatre', 'OnLocation'],
         description: 'Are you intrested in art and love painting? Then this is the event for you!',
         location: 'Gothenburg, Änggårdsgatan 46',
-        date: '24/1/2022',
+        date: 'Thursday, May 12, 2022',
         time: '16:30',
         hostName: 'julie_arts'
     }
@@ -164,7 +164,7 @@ function EventList() {
 
                 {showDetails ? 
                 <div>
-                    <button onClick={closeEventClickHandler}>close</button>
+                    <button className="back-btn" onClick={closeEventClickHandler}>{'< Back to events'}</button>
                     <EventDetails eventDetails={data} id={chosenId} />
                 </div>
                 : null}
