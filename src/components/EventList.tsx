@@ -19,7 +19,8 @@ const data: Events[] = [
         location: 'Gothenburg, Blåsvädergatan 21',
         date: 'Friday, February 25, 2022',
         time: '18:00',
-        hostName: 'Daniel_1212'
+        hostName: 'Daniel_1212', 
+		matches: 0
     },
     {
         id: 'rtrhjrghfgh',
@@ -30,7 +31,8 @@ const data: Events[] = [
         location: 'Gothenburg, Pusterviksgatan 3',
         date: 'Tuesday, March 15, 2022',
         time: '20:00',
-        hostName: 'Thundering_Llamas'
+		hostName: 'Thundering_Llamas', 
+		matches: 0
     },
     {
         id: 'cnfbcvfvfg',
@@ -41,7 +43,9 @@ const data: Events[] = [
         location: 'Gothenburg, Andra Lång',
         date: 'Tuesday, March 22, 2022',
         time: '18:30',
-        hostName: 'hungry_frog'
+		hostName: 'hungry_frog', 	
+		matches: 0
+       
     },
     {
         id: 'fghtrhythtg',
@@ -52,7 +56,8 @@ const data: Events[] = [
         location: 'Stockholm',
         date: 'Wednesday, February 2, 2022',
         time: '13:00',
-        hostName: 'the_tournament_host'
+        hostName: 'the_tournament_host', 
+		matches: 0
     },
     {
         id: 'bmhkjjkda',
@@ -63,16 +68,22 @@ const data: Events[] = [
         location: 'Gothenburg, Änggårdsgatan 46',
         date: 'Thursday, May 12, 2022',
         time: '16:30',
-        hostName: 'julie_arts'
+        hostName: 'julie_arts', 
+		matches: 0
     }
 ]
 
+interface Props {
+	userInterests: string[]
+}
 
-function EventList() {
+function EventList({userInterests} : Props) {
     const [events, setEvents] = useState<Events[]>(data)
     const [showDetails, setShowDetails] = useState(false)
     const [showList, setShowList] = useState(true)
     const [chosenId, setChosenId] = useState('')
+	// const [userInterests, setUserInterests] = useState(JSON.parse(localStorage.getItem('interestArray') || '[]'))
+	const [filteredEvents, setFilteredEvents] = useState([])
 
 
     const addEvent = (newEvent: Events) => {
@@ -121,8 +132,48 @@ function EventList() {
         setShowDetails(!showDetails)
     }
 
+	function filterByUserInterests () {
+		console.log('in filtering function')
+		
+		const filterEvents: any = data.filter(event => {
+			for(let i = 0; i < userInterests.length; i++) {
+				if(event.interests.includes(userInterests[i])) {
+					console.log(event)
+					return true
+				}
+			}
+			return false
+		})
 
-    return (
+		setFilteredEvents(filterEvents) 
+		console.log(filteredEvents)
+
+		// function addToMatches() {
+		// 	filteredEvents.forEach( event => {
+		// 	  for(let i = 0; i < userInterests.length; i++) {
+		// 		 if(event.interests.includes(userInterests[i])) {
+		// 		   event.matches += 1
+		// 		 } 
+		// 	  } console.log('matches ' + event.matches)
+		// 	})
+		//   }	
+
+		// addToMatches() 
+	}
+	
+	const eventsToShow = userInterests.length === 0 
+	? events 
+	: events.filter(event => {
+		for(let i = 0; i < userInterests.length; i++) {
+			if(event.interests.includes(userInterests[i])) {
+				return true
+			}
+		}
+		return false
+	})
+				
+
+    return (<div>
             <ul>
 
                 {showList && ( <CreateEvent events={data} addEvent={addEvent}/> ) }
@@ -130,7 +181,7 @@ function EventList() {
                
                 {showList ? (
                     <div id='event' className='event-list'>
-                        {events.map(event => (   
+                        {eventsToShow.map(event => (   
                             
                             <li className='event' key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
                                 <div>
@@ -141,12 +192,12 @@ function EventList() {
                                 </div>
                                 </div>
 
-
-                                <div className='all-paragraph'>
-                                <div>
-                                <p>{event.date}, {event.time}</p>
-                                <p>{event.location}</p>
-                                </div>
+								
+								<div className='all-paragraph'>
+								<div>
+								<p>{event.date}, {event.time}</p>
+								<p>{event.location}</p>
+								</div>
 
                                 <div className='interest-list'>
                                 <label id="interest-label">Interest</label>
@@ -157,8 +208,8 @@ function EventList() {
                                 <p>{event.hostName}</p>
                                 </div>
 
-                            </li>                
-                        ))}
+					</li>                
+				))}
                     </div>
                     ) : null}
 
@@ -169,8 +220,10 @@ function EventList() {
                 </div>
                 : null}
                
-            </ul>
-    )
+            </ul> 
+		</div>
+		)
+	
 }
 
 export default EventList

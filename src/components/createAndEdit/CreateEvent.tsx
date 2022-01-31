@@ -50,7 +50,8 @@ const CreateEvent = ({events, addEvent}: Props) => {
     location: location,
     date: date,
     time: time,
-    hostName: hostName
+    hostName: hostName, 
+	matches: 0
     }
 
     const showFormClickHandler = () => {

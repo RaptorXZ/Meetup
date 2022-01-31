@@ -1,14 +1,22 @@
 import { render, screen, queryByText, within } from '@testing-library/react'
+import {useState} from 'react' 
+import Interests from './Interests'
 import EventList from './EventList'
+
+const Wrapper = () => {
+	const [userInterests, setUserInterests] = useState<string[]>([])
+	return <EventList userInterests={userInterests} />
+} 
+
 
 describe('EventList component', () => {
 
     it('renders without crashing', () => {
-        render( <EventList /> )
+        render( <Wrapper/> )
     })
 
     it('renders initially at least 5 events', () => {
-        render( <EventList/> )
+        render( <Wrapper/> )
 
         const events = screen.getAllByRole('listitem')
         
@@ -16,7 +24,7 @@ describe('EventList component', () => {
     })
 
     it('renders a specific event name', () => {
-		render( <EventList /> )
+		render( <Wrapper/> )
 
 		const event = screen.getByText(/Karaoke for coders/)
 
@@ -24,7 +32,7 @@ describe('EventList component', () => {
 	})
 
     it('renders a host name for each event', () => {
-		render( <EventList /> )
+		render( <Wrapper/> )
 		
         const events = screen.getAllByRole('listitem')
 
@@ -36,7 +44,7 @@ describe('EventList component', () => {
 	})
 
     it('renders a date for a specific event', () => {
-		render( <EventList /> )
+		render( <Wrapper/> )
 		
         const events = screen.getAllByRole('listitem')
 
@@ -44,7 +52,7 @@ describe('EventList component', () => {
 	})
 
     it('renders at least one interest for each event', () => {
-		render( <EventList /> )
+		render( <Wrapper/> )
 		
         const events = screen.getAllByRole('listitem')
 

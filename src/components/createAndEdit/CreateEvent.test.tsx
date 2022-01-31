@@ -1,8 +1,14 @@
 import {render, screen, within} from '@testing-library/react'
 import userEvent from "@testing-library/user-event"
+import { useState } from 'react'
 import CreateEvent from './CreateEvent'
 import EventList from '../EventList'
 import { Events } from '../../models/Events'
+
+const Wrapper = () => {
+	const [userInterests, setUserInterests] = useState<string[]>([])
+	return <EventList userInterests={userInterests} />
+} 
 
 describe('create event component', () => {
 
@@ -15,7 +21,8 @@ describe('create event component', () => {
         location: 'Gothenburg, Änggårdsgatan 46',
         date: '24/1/2022',
         time: '16:30',
-        hostName: 'julie_arts'
+        hostName: 'julie_arts', 
+		matches: 0
     }
 
     let mockAddEvent: jest.Mock; //(newEvent: Events) => void;
@@ -36,7 +43,7 @@ describe('create event component', () => {
     })
 
     it('is not possible to save meetup if input fields are left empty and no checkboxes have been checked', () => {
-        render(<EventList/>)
+        render(<Wrapper/>)
 
         const createButton = screen.getByRole('button', {name: 'create meetup'})
         userEvent.click(createButton)
@@ -57,7 +64,7 @@ describe('create event component', () => {
     })
 
     it('saves the new meetup and it becomes visible in the list after user clicks button "save meetup"', () => {
-        render(<EventList/>)
+        render(<Wrapper/>)
 
         const createButton = screen.getByRole('button', {name: 'create meetup'})
         userEvent.click(createButton)
