@@ -1,0 +1,25 @@
+
+.comments-headline {
+    margin-bottom: .5em;
+}
+
+.comment-section {
+    min-height: 5em;
+}
+
+.comment-section p {
+    background-color: #F834A9;
+    color: black;
+    font-size: 1.2em;
+    margin: 1em 1em 1em 0;
+    padding: .75em;
+    border-radius: 8px;
+    border-color: white;
+}
+
+#comment {
+    background-color: silver;
+    min-height: 3em;
+    min-width: 19em;
+    border-radius: 16px;
+}

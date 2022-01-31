@@ -48,7 +48,7 @@ describe('EventList component', () => {
 		
         const events = screen.getAllByRole('listitem')
 
-        expect(within(events[4]).getByText('24/1/2022, 16:30')).toBeInTheDocument()
+        expect(within(events[4]).getByText('Thursday, May 12, 2022, 16:30')).toBeInTheDocument()
 	})
 
     it('renders at least one interest for each event', () => {

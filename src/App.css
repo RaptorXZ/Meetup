@@ -31,10 +31,42 @@ footer {
   background-color: #140A28;
 }
 
+ul {
+  padding: 0;
+}
+
 li {
   list-style: none;
 }
 
 label {
   display: none;
+}
+
+.grid-horizontal-2 {
+  display: grid;
+  grid-template-columns: auto auto;
+  width: 100%;
+}
+
+.flexbox-vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.flexbox-horizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.width-50 {
+  width: 40vw;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.larger-text {
+  font-size: 1.4em;
 }
