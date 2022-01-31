@@ -27,13 +27,19 @@ describe('create event component', () => {
 
     let mockAddEvent: jest.Mock; //(newEvent: Events) => void;
 
-    it('renders without crashing', () => {
+    it('initially input fields are empty and has no css classes', () => {
         render(<CreateEvent events={[details]} addEvent={mockAddEvent} />)
+
+        const createButton = screen.getByRole('button', {name: 'create meetup'})
+        userEvent.click(createButton)
+        
+        const [input] = screen.getAllByPlaceholderText('Type here...')
+        expect(input).toHaveValue('')
+        expect(input).not.toHaveClass('invalidName')
     })
 
     it('shows a form to create a new event after user clicks button "create meetup"', () => {
         render(<CreateEvent events={[details]} addEvent={mockAddEvent}/>)
-        // render(<EventList/>)
 
         const createButton = screen.getByRole('button', {name: 'create meetup'})
         userEvent.click(createButton)
@@ -42,78 +48,67 @@ describe('create event component', () => {
         expect(form).toBeInTheDocument()
     })
 
-    it('is not possible to save meetup if input fields are left empty and no checkboxes have been checked', () => {
+    it('an input fields gets class invalid if left empty when trying to submit event', () => {
         render(<Wrapper/>)
 
         const createButton = screen.getByRole('button', {name: 'create meetup'})
         userEvent.click(createButton)
 
         const saveButton = screen.getByRole('button', {name: 'save meetup'})
-        const [input] = screen.getAllByPlaceholderText('Type here...')
+        const input = screen.getAllByPlaceholderText('Type here...')
 
-        userEvent.type(input as HTMLElement, '')
+        userEvent.type(input[0] as HTMLElement, '')
         userEvent.click(saveButton)
-        // userEvent.click(saveButton)
-
-        expect(input).toHaveClass('invalidName')
-
-        const events = screen.getAllByRole('listitem')
-        // expect(events).toBeInTheDocument()
         
-        const savedMeetup = within(events[5]).getByText('')
-        expect(savedMeetup).toHaveValue('')
+        expect(input[0]).toHaveClass('invalidName')
     })
 
-    // it('saves the new meetup and it becomes visible in the list after user clicks button "save meetup"', async () => {
-    //     render(<EventList/>)
-    //     // render(<CreateEvent events={[details]} addEvent={mockAddEvent} />)
-    it('saves the new meetup and it becomes visible in the list after user clicks button "save meetup"', () => {
+   
+    it('becomes visible in the list after user clicks button "save meetup" and input fields are not invalid', () => {
         render(<Wrapper/>)
-
+        
         const createButton = screen.getByRole('button', {name: 'create meetup'})
         userEvent.click(createButton)
-
-        const saveButton = screen.getByRole('button', {name: 'save meetup'})
         
-        const [input] = screen.getAllByPlaceholderText('Type here...')
-        userEvent.type(input as HTMLElement, 'example greg')
+        const saveButton = screen.getByRole('button', {name: 'save meetup'})
+        const input = screen.getAllByPlaceholderText('Type here...')
+
+        userEvent.type(input[0] as HTMLElement, 'example')
+        userEvent.type(input[1] as HTMLElement, 'example')
         userEvent.click(saveButton)
 
-        const events = screen.getAllByRole('listitem')
-        expect(events.length).toBeGreaterThan(5)
-    //     const saved = screen.getByText('example greg')
+        expect(input[0]).not.toHaveClass('invalidName')
+        expect(input[1]).not.toHaveClass('invalidDesc')
 
-    //     // const events = screen.getAllByRole('listitem')
-
-
-    //     // const savedMeetup = within(events).getByText('example')
-    //     expect(saved).toBeInTheDocument()
+        const saved = screen.getByText('example')
+        expect(saved).toBeInTheDocument()
     })
 
 
-    // it('closes the form and clears input fields and checkboxes after user clicks "save meetup"', () => {
-    //     render(<EventList/>)
+    it('closes the form and clears input fields and checkboxes after user clicks "save meetup"', () => {
+        render(<Wrapper/>)
+        
+        const createButton = screen.getByRole('button', {name: 'create meetup'})
+        userEvent.click(createButton)
+        
+        const saveButton = screen.getByRole('button', {name: 'save meetup'})
+        const input = screen.getAllByPlaceholderText('Type here...')
+        const checkboxes = screen.getAllByPlaceholderText('checkboxes')
+        const imageRadio = screen.getAllByPlaceholderText('photo')
 
-    //     const createButton = screen.getByRole('button', {name: 'create meetup'})
-    //     userEvent.click(createButton)
+        userEvent.click(saveButton)
 
-    //     const saveButton = screen.getByRole('button', {name: 'save meetup'})
-    //     const [input] = screen.getAllByPlaceholderText('Type here...')
-    //     userEvent.type(input as HTMLElement, 'example name')
-    //     userEvent.click(saveButton)
+        input.forEach( input => 
+			expect(input).toHaveValue('')
+		)
+        checkboxes.forEach( checkboxes => 
+			expect(checkboxes).not.toBeChecked()
+		)
+        imageRadio.forEach( imageRadio => 
+			expect(imageRadio).not.toBeChecked()
+		)
 
-    //     const events = screen.getAllByRole('listitem')
-    //     expect(events.length).toBeGreaterThan(4)
-
-    //     // const savedMeetup = within(events).getByRole('listitem')
-    //     // expect(savedMeetup).toBeInTheDocument()
-
-    //     // userEvent.click(createButton)
-    //     userEvent.click(saveButton)
-    //     expect(input).toHaveValue('')
-
-    //     // const form = screen.getByText('create your new event!')
-    //     // expect(form).not.toBeInTheDocument()
-
-    // })
+        const form = screen.queryByText('create your new event!')
+        expect(form).not.toBeInTheDocument()
+    })
 })

@@ -50,8 +50,8 @@ const CreateEvent = ({events, addEvent}: Props) => {
     location: location,
     date: date,
     time: time,
-    hostName: hostName, 
-	matches: 0
+    hostName: hostName,
+    matches: 0
     }
 
     const showFormClickHandler = () => {
@@ -191,7 +191,7 @@ const CreateEvent = ({events, addEvent}: Props) => {
                 {cehckInterest.map((interest) => (
                     <label htmlFor={interest}>{interest}
                     <span className={alertInterest}>
-                    <input type="checkbox" value={interest}  onChange={handleCheck}/>
+                    <input type="checkbox" placeholder="checkboxes" value={interest}  onChange={handleCheck}/>
                     </span>
                     </label>
                 ))}
@@ -200,7 +200,7 @@ const CreateEvent = ({events, addEvent}: Props) => {
                     <div>
                         <img src={photo} alt='' height="80px" />
                         <span className={alertPhoto}>
-                            <input data-testid="photoInput" type="radio" name="meetupPhoto" value={photo} onChange={(e) => setImage(e.target.value)} />
+                            <input data-testid="photoInput" placeholder="photo" type="radio" name="meetupPhoto" value={photo} onChange={(e) => setImage(e.target.value)} />
                         </span>
                     </div>
                     
