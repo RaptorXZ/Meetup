@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <Header />
 	    <Interests userInterests={userInterests} setUserInterests={setUserInterests}/>
-      <EventList userInterests={userInterests} setUserInterests={setUserInterests}/>
+      <EventList userInterests={userInterests}/>
     </div>
   );
 }

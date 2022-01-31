@@ -1,8 +1,14 @@
 import {render, screen, within} from '@testing-library/react'
 import userEvent from "@testing-library/user-event"
+import { useState } from 'react'
 import EventDetails from './EventDetails'
 import EventList from './EventList'
 import { Events } from '../models/Events'
+
+const Wrapper = () => {
+	const [userInterests, setUserInterests] = useState<string[]>([])
+	return <EventList userInterests={userInterests} />
+} 
 
 describe('EventPage component', () => {
 
@@ -24,13 +30,13 @@ describe('EventPage component', () => {
     })
 
     it('the event details is not visible initially', () => {
-        render(<EventList/>)
+        render(<Wrapper/>)
         const eventDetails = screen.queryByRole('eventDetails')
         expect(eventDetails).not.toBeInTheDocument()
     })
 
     it('When the user clicks on a specific event the correct event details become visible', () => {
-        render(<EventList/>)
+        render(<Wrapper/>)
         const eventName = 'Karaoke for coders'
         const eventDesc = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.'
 
@@ -53,7 +59,7 @@ describe('EventPage component', () => {
     // })
 
     it('renders the signup button after the user clicks on an event', () => {
-        render(<EventList/>)
+        render(<Wrapper/>)
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)
 
@@ -62,7 +68,7 @@ describe('EventPage component', () => {
     })
 
     it('signs the user up after clicking on the attend button', () => {
-        render(<EventList/>)
+        render(<Wrapper/>)
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)
 
@@ -73,7 +79,7 @@ describe('EventPage component', () => {
     })
 
     it('withdraws the users signup after clicking on the attend button twice', () => {
-        render(<EventList/>)
+        render(<Wrapper/>)
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)
 
@@ -85,7 +91,7 @@ describe('EventPage component', () => {
     })
 
     it('does not show comments on events initially', () => {
-        render(<EventList/>)
+		render(<Wrapper/>)
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)
 
@@ -95,7 +101,7 @@ describe('EventPage component', () => {
     })
 
     it('renders comments on an event after the user clicks on the attend button', () => {
-        render(<EventList/>)
+        render(<Wrapper/>)
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)
 

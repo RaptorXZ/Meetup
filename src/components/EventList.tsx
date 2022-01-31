@@ -75,10 +75,9 @@ const data: Events[] = [
 
 interface Props {
 	userInterests: string[]
-	setUserInterests: (userInterests: string[]) => void
 }
 
-function EventList({userInterests, setUserInterests} : Props) {
+function EventList({userInterests} : Props) {
     const [events, setEvents] = useState<Events[]>(data)
     const [showDetails, setShowDetails] = useState(false)
     const [showList, setShowList] = useState(true)
@@ -144,7 +143,6 @@ function EventList({userInterests, setUserInterests} : Props) {
 		}
 		return false
 	})
-		
 
     return (
 			<div>
@@ -152,7 +150,7 @@ function EventList({userInterests, setUserInterests} : Props) {
                 {showList ? (
                     <div className='event-list'> 
                     {(eventsToShow.map(event => (  
-					<li className='event' key={event.id} data-testid={'event' + event.id} data-testingID="listitem-events"  onClick={ () => eventClickHandler(events, event.id)}>
+					<li className='event' key={event.id} data-testid={'event' + event.id} data-testingid="listitem-events"  onClick={ () => eventClickHandler(events, event.id)}>
 						<div>
 						<label id="eventname-label">Eventname</label>
 						<h3 aria-labelledby="eventname-label">{event.eventName}</h3>
