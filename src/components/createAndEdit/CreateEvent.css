@@ -10,3 +10,33 @@
     justify-content: start;
     align-items: flex-start;
 }
+
+.invalidName{
+    border: solid 1px red;
+}
+.invalidDesc{
+    border: solid 1px red;
+}
+.invalidLocation{
+    border: solid 1px red;
+}
+.invalidDate{
+    border: solid 1px red;
+}
+.invalidTime{
+    border: solid 1px red;
+}
+
+.invalidHost{
+    border: solid 1px red;
+}
+
+.invalidInterest{
+    border: solid 1px red;
+    border-radius: 3px;
+}
+
+.invalidPhoto{
+    border: solid 1px red;
+    border-radius: 90px;
+}

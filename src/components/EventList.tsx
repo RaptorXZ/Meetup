@@ -85,7 +85,7 @@ function EventList() {
 //    console.log(events)
 
     useEffect( () => {
-        let storage: any //Array<string> | null = []
+        let storage: [] = []
         const stored = localStorage.getItem('meetup-storage')
         if (stored !== null) {
         try {
