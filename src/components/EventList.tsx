@@ -146,19 +146,7 @@ function EventList({userInterests} : Props) {
 		})
 
 		setFilteredEvents(filterEvents) 
-		console.log(filteredEvents)
-
-		// function addToMatches() {
-		// 	filteredEvents.forEach( event => {
-		// 	  for(let i = 0; i < userInterests.length; i++) {
-		// 		 if(event.interests.includes(userInterests[i])) {
-		// 		   event.matches += 1
-		// 		 } 
-		// 	  } console.log('matches ' + event.matches)
-		// 	})
-		//   }	
-
-		// addToMatches() 
+		console.log(filteredEvents) 
 	}
 	
 	const eventsToShow = userInterests.length === 0 
@@ -171,7 +159,17 @@ function EventList({userInterests} : Props) {
 		}
 		return false
 	})
-				
+	
+	const matchesCount = eventsToShow.map(event => {
+		let matchesCount = event.interests.filter(int => {
+			return userInterests.includes(int);
+		})
+		event.matches = matchesCount.length;
+		return event
+	})
+	
+	const sortedByMatches = matchesCount.sort((ev1, ev2) => ev2.matches - ev1.matches)
+
 
     return (<div>
             <ul>
@@ -181,7 +179,7 @@ function EventList({userInterests} : Props) {
                
                 {showList ? (
                     <div id='event' className='event-list'>
-                        {eventsToShow.map(event => (   
+                        {sortedByMatches.map(event => (   
                             
                             <li className='event' key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
                                 <div>
