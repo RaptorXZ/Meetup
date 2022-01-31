@@ -1,0 +1,12 @@
+.newEventForm > label{
+    display: contents;
+    color: #fff;
+}
+
+.newEventForm{
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+}

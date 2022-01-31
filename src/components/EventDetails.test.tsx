@@ -38,7 +38,7 @@ describe('EventPage component', () => {
     it('When the user clicks on a specific event the correct event details become visible', () => {
         render(<Wrapper/>)
         const eventName = 'Karaoke for coders'
-        const eventDesc = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.'
+        const eventDesc = "Are you unsure whether you are better at singing or programming? Or perhaps you have always wondered what Rick Astley's 'Never Gonna Give You Up' would sound like in binary? Come to Karaoke for Coders and find out!"
 
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)
@@ -52,11 +52,6 @@ describe('EventPage component', () => {
         const correctDesc = within(eventDetails).getByText(eventDesc)
         expect(correctDesc).toBeInTheDocument()
     })
-
-    // it('When the user clicks on an event the correct information is shown about the event', () => {
-    //     render(<EventList/>)
-
-    // })
 
     it('renders the signup button after the user clicks on an event', () => {
         render(<Wrapper/>)
@@ -74,8 +69,9 @@ describe('EventPage component', () => {
 
         const [button] = screen.getAllByText('Attend')
         userEvent.click(button)
+        userEvent.click(button)
 
-        expect(button).toHaveTextContent('Signed up!')
+        expect(button).toHaveTextContent('Attend')
     })
 
     it('withdraws the users signup after clicking on the attend button twice', () => {
@@ -83,11 +79,9 @@ describe('EventPage component', () => {
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)
 
-        const [button] = screen.getAllByText('Attend')
-        userEvent.click(button)
-        userEvent.click(button)
+        const commentfield = screen.queryByText('Discuss this meetup')
 
-        expect(button).toHaveTextContent('Attend')
+        expect(commentfield).toBeNull()
     })
 
     it('does not show comments on events initially', () => {
@@ -95,9 +89,11 @@ describe('EventPage component', () => {
         const [event] = screen.getAllByRole('listitem')
         userEvent.click(event)
 
-        const commentfield = screen.queryByText('Discuss this meetup')
+        const [button] = screen.getAllByText('Attend')
+        userEvent.click(button)
 
-        expect(commentfield).toBeNull()
+        expect(button).toHaveTextContent('Signed up!')
+        userEvent.click(button)
     })
 
     it('renders comments on an event after the user clicks on the attend button', () => {

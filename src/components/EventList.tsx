@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { nanoid } from 'nanoid';
+import React, { useState, useEffect } from 'react';
 import { Events } from '../models/Events'
 import EventDetails from './EventDetails'
 import karaoke from '../images/karaoke.jpg'
@@ -8,7 +7,7 @@ import concert from '../images/concert.jpg'
 import gaming from '../images/gaming.jpg'
 import painting from '../images/painting.jpg'
 import './EventList.css'
-import { JsxElement } from 'typescript';
+import CreateEvent from './createAndEdit/CreateEvent'
 
 const data: Events[] = [
     {
@@ -16,7 +15,7 @@ const data: Events[] = [
         image: karaoke,
         eventName: 'Karaoke for coders',
         interests: ['Coding', 'Singing', 'Tech'],
-        description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.',
+        description: "Are you unsure whether you are better at singing or programming? Or perhaps you have always wondered what Rick Astley's 'Never Gonna Give You Up' would sound like in binary? Come to Karaoke for Coders and find out!",
         location: 'Gothenburg',
         date: '12/3/2022',
         time: '18:00',
@@ -28,11 +27,11 @@ const data: Events[] = [
         image: concert,
         eventName: 'Awesome concert',
         interests: ['OnLocation', 'Singing', 'Music', 'Theatre'],
-        description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.',
+        description: "You might never have heard of the Thundering Llamas, or our unique rendition of Metallica's 'Nothing Else Matters', but it's not too late to change!",
         location: 'Gothenburg, Pusterviksgatan 3',
         date: '15/3/2022',
         time: '20:00',
-        hostName: 'JoJo', 
+		hostName: 'Thundering_Llamas', 
 		matches: 0
     },
     {
@@ -40,19 +39,20 @@ const data: Events[] = [
         image: food,
         eventName: 'Dinner Time',
         interests: ['OnLocation', 'Food'],
-        description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.',
+        description: "A great chance to get to know some new people and try out some great food! No couples!",
         location: 'Gothenburg, Andra Lång',
         date: '22/3/2022',
         time: '18:30',
-        hostName: 'david1337', 	
+		hostName: 'hungry_frog', 	
 		matches: 0
+       
     },
     {
         id: 'fghtrhythtg',
         image: gaming,
         eventName: 'CS Tournament',
         interests: ['Tech', 'Gaming'],
-        description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut voluptas velit voluptates dolorum consequatur assumenda.',
+        description: "Noobs and pros welcome. Teams of 5. Viewers also welcome. Participation is free, viewers pay $5 entry. Bring your own tech.",
         location: 'Stockholm',
         date: '2/2/2022',
         time: '13:00',
@@ -84,6 +84,34 @@ function EventList({userInterests} : Props) {
     const [chosenId, setChosenId] = useState('')
 	// const [userInterests, setUserInterests] = useState(JSON.parse(localStorage.getItem('interestArray') || '[]'))
 	const [filteredEvents, setFilteredEvents] = useState([])
+
+
+    const addEvent = (newEvent: Events) => {
+            const newArr = [...events, newEvent]
+            console.log(newArr)
+            setEvents(newArr)
+        // console.log('amount of events', events.length)
+    }
+
+//    console.log(events)
+
+    useEffect( () => {
+        let storage: any //Array<string> | null = []
+        const stored = localStorage.getItem('meetup-storage')
+        if (stored !== null) {
+        try {
+        storage = JSON.parse(stored)
+        console.log(storage)
+        setEvents(storage)
+        } catch (e) { console.log('error') } 
+        }
+	
+	}, [])
+
+
+    useEffect( () => {
+        localStorage.setItem('meetup-storage', JSON.stringify(events))
+    }, [events])
 
     const eventClickHandler = (events: any, eventId: Events['id']) => {
         if(events.key !== eventId){
@@ -130,9 +158,9 @@ function EventList({userInterests} : Props) {
 		// 	})
 		//   }	
 
-		// addToMatches()
+		// addToMatches() 
 	}
- 
+	
 	const eventsToShow = userInterests.length === 0 
 	? events 
 	: events.filter(event => {
@@ -143,39 +171,45 @@ function EventList({userInterests} : Props) {
 		}
 		return false
 	})
+				
 
-    return (
-			<div>
-            <ul> 
+    return (<div>
+            <ul>
+
+                {showList && ( <CreateEvent events={data} addEvent={addEvent}/> ) }
+                
+               
                 {showList ? (
-                    <div className='event-list'> 
-                    {(eventsToShow.map(event => (  
-					<li className='event' key={event.id} data-testid={'event' + event.id} data-testingid="listitem-events"  onClick={ () => eventClickHandler(events, event.id)}>
-						<div>
-						<label id="eventname-label">Eventname</label>
-						<h3 aria-labelledby="eventname-label">{event.eventName}</h3>
-						<div>
-						<img src={event.image} alt={event.eventName} height="150px" />
-						</div>
-						</div>
+                    <div id='event' className='event-list'>
+                        {eventsToShow.map(event => (   
+                            
+                            <li className='event' key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
+                                <div>
+                                <label id="eventname-label">Eventname</label>
+                                <h3 aria-labelledby="eventname-label">{event.eventName}</h3>
+                                <div>
+                                <img src={event.image} alt={event.eventName} height="150px" />
+                                </div>
+                                </div>
 
-						<div className='all-paragraph'>
-						<div>
-						<p>{event.date}, {event.time}</p>
-						<p>{event.location}</p>
-						</div>
+								
+								<div className='all-paragraph'>
+								<div>
+								<p>{event.date}, {event.time}</p>
+								<p>{event.location}</p>
+								</div>
 
-						<div className='interest-list'>
-						<label id="interest-label">Interest</label>
-						{event.interests.map(interest => (
-								<p className='interest-paragraph' aria-labelledby="interest-label">{interest},</p>
-						))}
-						</div>
-						<p>{event.hostName}</p>
-						</div>
+                                <div className='interest-list'>
+                                <label id="interest-label">Interest</label>
+                                {event.interests.map(interest => (
+                                        <p className='interest-paragraph' aria-labelledby="interest-label">{interest}</p>
+                                ))}
+                                </div>
+                                <p>{event.hostName}</p>
+                                </div>
 
 					</li>                
-				)))}
+				))}
                     </div>
                     ) : null}
 
@@ -186,9 +220,10 @@ function EventList({userInterests} : Props) {
                 </div>
                 : null}
                
-            </ul>
-			</div>
-    )
+            </ul> 
+		</div>
+		)
+	
 }
 
 export default EventList
