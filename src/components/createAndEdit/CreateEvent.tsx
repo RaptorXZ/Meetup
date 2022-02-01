@@ -148,7 +148,9 @@ const CreateEvent = ({events, addEvent}: Props) => {
 
     return(
         <div className="body">
-            <button onClick={showFormClickHandler}>{!showForm ? 'create meetup' : 'CLOSE'}</button>
+            <div className="position-button">
+            <button className="create-button" onClick={showFormClickHandler}>{!showForm ? 'create meetup' : 'CLOSE'}</button>
+            </div>
 
             {showForm ? 
             (<div>
@@ -179,6 +181,7 @@ const CreateEvent = ({events, addEvent}: Props) => {
                 <label htmlFor="hname">Your name:
                 <input type="text" placeholder="Type here..." className={alertHost} value={hostName} onChange={(e) => setHostName(e.target.value)}/>
                 </label>
+                <label>Choose an interest:</label>
                 </div>
 
                 <div className="check">
@@ -191,6 +194,7 @@ const CreateEvent = ({events, addEvent}: Props) => {
                 ))}
                 </div>
 
+                <p>Choose a photo:</p>
                 <div className="photo">
                 {photoArray.map((photo) => (
                     <div>

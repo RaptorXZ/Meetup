@@ -6,6 +6,27 @@
     padding: 0.5rem;
 }
 
+p{
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.position-button{
+    display: grid;
+    justify-content: flex-end;
+}
+
+.create-button{
+    border: none;
+    background-color:rgba(128, 255, 0, 0);
+    color: #fff;
+}
+
+.create-button:hover{
+    cursor: pointer;
+    color: cornflowerblue;
+}
+
 .newEventForm .input-layout > label > input{
     min-width: 200px;
 }
@@ -62,16 +83,22 @@ span{
 }
 
 .body{
-     display: flex;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.body{
+    display: grid;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    margin-right: 50px;
 }
 
 .check{
-    background-color: #4f318d;
+    background-color: #27242c;
     padding: 1rem 00.5rem 1rem 0.5rem;
-    margin: 1rem 0 1rem 0;
+    margin: 0rem 0 1rem 0;
     border-radius: 5px;
 }
 
