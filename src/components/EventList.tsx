@@ -82,32 +82,24 @@ function EventList({userInterests} : Props) {
     const [showDetails, setShowDetails] = useState(false)
     const [showList, setShowList] = useState(true)
     const [chosenId, setChosenId] = useState('')
-	// const [userInterests, setUserInterests] = useState(JSON.parse(localStorage.getItem('interestArray') || '[]'))
 	const [filteredEvents, setFilteredEvents] = useState([])
-
 
     const addEvent = (newEvent: Events) => {
             const newArr = [...events, newEvent]
             console.log(newArr)
             setEvents(newArr)
-        // console.log('amount of events', events.length)
     }
-
-//    console.log(events)
 
     useEffect( () => {
         let storage: [] = []
         const stored = localStorage.getItem('meetup-storage')
         if (stored !== null) {
-        try {
-        storage = JSON.parse(stored)
-        console.log(storage)
-        setEvents(storage)
-        } catch (e) { console.log('error') } 
+            try {
+                storage = JSON.parse(stored)
+                setEvents(storage)
+            } catch (e) { console.log('error') }
         }
-	
 	}, [])
-
 
     useEffect( () => {
         localStorage.setItem('meetup-storage', JSON.stringify(events))
@@ -123,11 +115,21 @@ function EventList({userInterests} : Props) {
                 setShowList(showList)
                 setChosenId(eventId)
         } else {
-            console.log('sorry we cant find your event')
+            console.log("Sorry, we can't find your event")
         }
     }
 
     const closeEventClickHandler = () => {
+        setShowList(!showList)
+        setShowDetails(!showDetails)
+    }
+
+    const deleteEventClickHandler = () => {
+        const eventsArr: Events[] = events;
+        let filteredEvents: Events[] = eventsArr.filter(function(e) { return e.id !== chosenId})
+        console.log(filteredEvents)
+        setEvents(filteredEvents)
+
         setShowList(!showList)
         setShowDetails(!showDetails)
     }
@@ -170,33 +172,29 @@ function EventList({userInterests} : Props) {
 	
 	const sortedByMatches = matchesCount.sort((ev1, ev2) => ev2.matches - ev1.matches)
 
-
     return (<div>
             <ul>
 
                 {showList && ( <CreateEvent events={data} addEvent={addEvent}/> ) }
-                
                
                 {showList ? (
                     <div id='event' className='event-list'>
                         {sortedByMatches.map(event => (   
                             
-                            <li className='event' key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
-                                <div>
+                        <li className='event' key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
+                            <div>
                                 <label id="eventname-label">Eventname</label>
                                 <h3 aria-labelledby="eventname-label">{event.eventName}</h3>
                                 <div>
-                                <img src={event.image} alt={event.eventName} height="150px" />
+                                    <img src={event.image} alt={event.eventName} height="150px" />
                                 </div>
+                            </div>
+                            
+                            <div className='all-paragraph'>
+                                <div>
+                                    <p>{event.date}, {event.time}</p>
+                                    <p>{event.location}</p>
                                 </div>
-
-								
-								<div className='all-paragraph'>
-								<div>
-								<p>{event.date}, {event.time}</p>
-								<p>{event.location}</p>
-								</div>
-
                                 <div className='interest-list'>
                                 <label id="interest-label">Interest</label>
                                 {event.interests.map(interest => (
@@ -204,7 +202,7 @@ function EventList({userInterests} : Props) {
                                 ))}
                                 </div>
                                 <p>{event.hostName}</p>
-                                </div>
+                            </div>
 
 					</li>                
 				))}
@@ -214,6 +212,7 @@ function EventList({userInterests} : Props) {
                 {showDetails ? 
                 <div>
                     <button className="back-btn larger-text" onClick={closeEventClickHandler}>{'< Back to events'}</button>
+                    <button className="back-btn larger-text" onClick={deleteEventClickHandler}>{'Delete event'}</button>
                     <EventDetails eventDetails={data} id={chosenId} />
                 </div>
                 : null}

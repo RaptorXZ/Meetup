@@ -12,7 +12,7 @@ const Wrapper = () => {
 
 describe('EventPage component', () => {
 
-    const details: Events = { 
+    const details: Events = {
         id: 'bmhkjjkda',
         image: 'image',
         eventName: 'Painting Meetup',
