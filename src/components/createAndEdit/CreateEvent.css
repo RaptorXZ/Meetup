@@ -3,10 +3,53 @@
     color: #fff;
     display: flex;
     justify-content: space-between;
+    padding: 0.5rem;
 }
 
 .newEventForm .input-layout > label > input{
     min-width: 200px;
+}
+
+.newEventForm{
+    background-color: #000000;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.checkPhoto{
+    border: solid 4px white;
+}
+
+.save{
+    border: none;
+    border-radius: 3px;
+    padding: 0.5rem 1.5rem;
+    text-transform:uppercase;
+    font-size: 1rem;
+    font-weight: 700;
+    background-color: #fff;
+}
+
+.save:hover{
+    cursor: pointer;
+    background-color: #7c42f1;
+    color: #fff;
+}
+
+input{
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 3px;
+    display: flex;
+}
+
+#interest-checkbox{
+    display: flex;
+    flex-direction: row;
+}
+
+#input-check{
+    cursor: pointer;
 }
 
 textarea{
@@ -15,7 +58,7 @@ textarea{
 }
 
 span{
-    padding: 8px;
+    padding: 2px 25px 7px 25px;
 }
 
 .body{
@@ -23,6 +66,13 @@ span{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.check{
+    background-color: #4f318d;
+    padding: 1rem 00.5rem 1rem 0.5rem;
+    margin: 1rem 0 1rem 0;
+    border-radius: 5px;
 }
 
 .newEventForm .check > label{
@@ -81,17 +131,4 @@ span{
 .invalidPhoto{
     border: solid 1px red;
     border-radius: 90px;
-}
-
-input{
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 3px;
-    display: flex;
-    /* flex-direction: column; */
-}
-
-#interest-checkbox{
-    display: flex;
-    flex-direction: row;
 }

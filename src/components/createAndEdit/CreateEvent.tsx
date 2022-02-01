@@ -185,7 +185,7 @@ const CreateEvent = ({events, addEvent}: Props) => {
                 {cehckInterest.map((interest) => (
                     <label htmlFor={interest}>{interest}
                     <span className={alertInterest} id="interest-checkbox">
-                    <input type="checkbox" placeholder="checkboxes" value={interest}  onChange={handleCheck}/>
+                    <input id="input-check" type="checkbox" placeholder="checkboxes" value={interest}  onChange={handleCheck}/>
                     </span>
                     </label>
                 ))}
@@ -194,7 +194,7 @@ const CreateEvent = ({events, addEvent}: Props) => {
                 <div className="photo">
                 {photoArray.map((photo) => (
                     <div>
-                        <img src={photo} alt='' height="80px" />
+                        <img src={photo} alt='' height="110px" className="checkPhoto" />
                         <span className={alertPhoto}>
                             <input data-testid="photoInput" placeholder="photo" type="radio" name="meetupPhoto" value={photo} onChange={(e) => setImage(e.target.value)} />
                         </span>
@@ -203,9 +203,9 @@ const CreateEvent = ({events, addEvent}: Props) => {
                 ))}
                 </div>
 
+                <button onClick={() => handleSubmit()} className="save">save meetup</button>
                 </form> 
 
-                <button onClick={() => handleSubmit()}>save meetup</button>
 
             </div>)
             : null}
