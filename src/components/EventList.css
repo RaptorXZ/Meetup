@@ -63,6 +63,10 @@ p {
 }
 
 .delete-btn {
-    background-color: #361e66;
-    color: white;
+	border: none;
+    border-radius: 5px;
+    padding: 1rem;
+    font-size: 1rem;
+    background-color: black;
+    color:  #fff;
 }
