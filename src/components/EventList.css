@@ -21,13 +21,11 @@ p{
     padding: 0;
 }
 
-
 .event{
     display: grid;
     grid-template-columns: 250px 250px;
     grid-template-rows: 250px ;
 }
-
 
 .all-paragraph{
     display: flex;
@@ -35,6 +33,13 @@ p{
     justify-content: start;
     align-items: flex-start;
     margin-top: 5rem;
+}
+
+.date-location {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	font-weight: bolder;
 }
 
 .interest-list{

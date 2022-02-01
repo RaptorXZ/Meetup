@@ -1,10 +1,11 @@
 
 .details-interests {
     justify-content: center;
+	margin-bottom: 1rem;
 }
 .details-interests p {
     margin: 0em .2em;
-    font-size: 1.4em;
+    font-size: 1.em;
 }
 
 .detail-image {
@@ -12,15 +13,17 @@
     margin-left: 0;
     max-width: 100%;
     height: auto;
+	padding: 1rem 0rem;
 }
 
 .attend-btn {
-    font-size: 1.2em !important;
+    font-size: 0.9em !important;
     background-color: #F834A9;
     border: none;
-    width: 23%;
+    width: 25%;
     margin: 1em 1em 1em 0em;
-    padding: .4em;
+    padding: 0.3em;
+	border-radius: 3px;
 }
 
 .left-column {
@@ -32,11 +35,11 @@
 }
 
 .event-date {
-    font-size: 1.6em;
+    font-size: 1.3em;
 }
 
 .event-name {
-    font-size: 2.6em;
+    font-size: 2em;
     margin-bottom: 0;
     margin-top: 0.5em;
 }
@@ -49,6 +52,26 @@
     text-align: left;
     justify-self: left;
 }
+
 .back-btn:hover {
     color: #F834A9;
+}
+
+@media only screen and (max-width: 550px) {
+	.grid-horizontal-2 {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.flexbox-vertical {
+		width: 90%;
+	}
+
+	.left-column {
+		margin-left: 1em;
+	}
+	
+	.right-column {
+		margin-top: 1em;
+	}
 }

@@ -191,7 +191,7 @@ function EventList({userInterests} : Props) {
 
 								
 								<div className='all-paragraph'>
-								<div>
+								<div className='date-location'>
 								<p>{event.date}, {event.time}</p>
 								<p>{event.location}</p>
 								</div>
