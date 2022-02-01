@@ -108,4 +108,15 @@ describe('EventPage component', () => {
 
         expect(commentfield).toBeInTheDocument()
     })
+
+    it('no longer renders an event after the user clicks on the delete event button', () => {
+        render(<Wrapper/>)
+        const [event] = screen.getAllByRole('listitem')
+        userEvent.click(event)
+
+        const deleteBtn = screen.getByText('Delete event')
+        userEvent.click(deleteBtn)
+
+        expect(screen.queryByText('Karaoke for Coders')).toBeNull()
+    })
 })
