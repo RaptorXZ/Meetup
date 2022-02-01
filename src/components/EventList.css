@@ -70,3 +70,9 @@ p {
     background-color: black;
     color:  #fff;
 }
+
+.delete-btn:hover {
+		cursor: pointer;
+		background-color:#7c42f1;
+		color: #fff;
+}
