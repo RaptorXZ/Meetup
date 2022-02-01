@@ -31,8 +31,7 @@ const EventPage = ({eventDetails, id}: Props) => {
 	
 	}, [])
             
-    const filterDetails = events.filter(filterDetails => filterDetails.id === id) // === id
-    console.log(id)
+    const filterDetails = events.filter(filterDetails => filterDetails.id === id)
 
     const attendClickHandler = () => {
         if(attending) {
