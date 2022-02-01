@@ -74,40 +74,31 @@ const CreateEvent = ({events, addEvent}: Props) => {
         storeNewMeetup(newMeetup)
         afterSubmit()
         setShowForm(!showForm)
-        // console.log(newMeetup)
     }
 
     const handleSubmit = () => {
         if(eventName === ''){
-            console.log('Please give your meetup a name')
             setAlertName('invalidName')
         } 
         else if(description === ''){
-            console.log('Please describe your meetup')
             setAlertDesc('invalidDesc')
         }
         else if(location === ''){
-            console.log('Please describe your meetup')
             setAlertLocation('invalidLocation')
         }
         else if(date === ''){
-            console.log('Please pick a date')
             setAlertDate('invalidDate')
         }
         else if(time === ''){
-            console.log('Please pick a time')
             setAlertTime('invalidTime')
         }
         else if(hostName === ''){
-            console.log('Please type in your name')
             setAlertHost('invalidHost')
         }
         else if(interest.length === 0){
-            console.log('please choose atleast 1 interest')
             setAlertInterest('invalidInterest')
         } 
         else if(image.length === 0){
-            console.log('please choose a photo')
             setAlertPhoto('invalidPhoto')
         }
         else {
@@ -156,14 +147,15 @@ const CreateEvent = ({events, addEvent}: Props) => {
 
 
     return(
-        <div>
-            <button onClick={showFormClickHandler}>create meetup</button>
+        <div className="body">
+            <button onClick={showFormClickHandler}>{!showForm ? 'create meetup' : 'CLOSE'}</button>
 
             {showForm ? 
             (<div>
                 <form className="newEventForm">
                 <h3>create your new event!</h3>
 
+                <div className="input-layout">
                 <label htmlFor="mname">Meetup name:
                 <input type="text" placeholder="Type here..." className={alertName} value={eventName} onChange={(e) => setEventName(e.target.value)}/>
                 </label>
@@ -187,15 +179,19 @@ const CreateEvent = ({events, addEvent}: Props) => {
                 <label htmlFor="hname">Your name:
                 <input type="text" placeholder="Type here..." className={alertHost} value={hostName} onChange={(e) => setHostName(e.target.value)}/>
                 </label>
+                </div>
 
+                <div className="check">
                 {cehckInterest.map((interest) => (
                     <label htmlFor={interest}>{interest}
-                    <span className={alertInterest}>
+                    <span className={alertInterest} id="interest-checkbox">
                     <input type="checkbox" placeholder="checkboxes" value={interest}  onChange={handleCheck}/>
                     </span>
                     </label>
                 ))}
+                </div>
 
+                <div className="photo">
                 {photoArray.map((photo) => (
                     <div>
                         <img src={photo} alt='' height="80px" />
@@ -205,6 +201,7 @@ const CreateEvent = ({events, addEvent}: Props) => {
                     </div>
                     
                 ))}
+                </div>
 
                 </form> 
 

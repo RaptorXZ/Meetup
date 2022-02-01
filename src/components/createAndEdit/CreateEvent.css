@@ -1,34 +1,76 @@
-.newEventForm > label{
+.newEventForm .input-layout > label{
     display: contents;
     color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+
+.newEventForm .input-layout > label > input{
+    min-width: 200px;
+}
+
+textarea{
+    min-width: 259px;
+    min-height: 80px;
+}
+
+span{
+    padding: 8px;
+}
+
+.body{
+     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.newEventForm .check > label{
+    display: contents;
+    color: #fff;
+    display: grid;
+}
+
+.input-layout{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.check{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.photo{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .newEventForm{
-    max-width: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: flex-start;
+    max-width: 400px;
 }
 
 .invalidName{
-    border: solid 1px red;
+    border: solid 2px red;
 }
 .invalidDesc{
-    border: solid 1px red;
+    border: solid 2px red;
 }
 .invalidLocation{
-    border: solid 1px red;
+    border: solid 2px red;
 }
 .invalidDate{
-    border: solid 1px red;
+    border: solid 2px red;
 }
 .invalidTime{
-    border: solid 1px red;
+    border: solid 2px red;
 }
 
 .invalidHost{
-    border: solid 1px red;
+    border: solid 2px red;
 }
 
 .invalidInterest{
@@ -39,4 +81,17 @@
 .invalidPhoto{
     border: solid 1px red;
     border-radius: 90px;
+}
+
+input{
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 3px;
+    display: flex;
+    /* flex-direction: column; */
+}
+
+#interest-checkbox{
+    display: flex;
+    flex-direction: row;
 }

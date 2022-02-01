@@ -181,8 +181,8 @@ function EventList({userInterests} : Props) {
                     <div id='event' className='event-list'>
                         {sortedByMatches.map(event => (   
                             
-                        <li className='event' key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
-                            <div>
+                            <li className='event' key={event.id} data-testid={'event' + event.id} data-testingid='listitem-events' onClick={ () => eventClickHandler(events, event.id)}>
+                                <div>
                                 <label id="eventname-label">Eventname</label>
                                 <h3 aria-labelledby="eventname-label">{event.eventName}</h3>
                                 <div>
@@ -198,7 +198,7 @@ function EventList({userInterests} : Props) {
                                 <div className='interest-list'>
                                 <label id="interest-label">Interest</label>
                                 {event.interests.map(interest => (
-                                        <p className='interest-paragraph' aria-labelledby="interest-label">{interest}</p>
+                                        <p key={interest} className='interest-paragraph' aria-labelledby="interest-label">{interest}</p>
                                 ))}
                                 </div>
                                 <p>{event.hostName}</p>
@@ -211,8 +211,10 @@ function EventList({userInterests} : Props) {
 
                 {showDetails ? 
                 <div>
-                    <button className="back-btn larger-text" onClick={closeEventClickHandler}>{'< Back to events'}</button>
-                    <button className="back-btn larger-text" onClick={deleteEventClickHandler}>{'Delete event'}</button>
+                    <div className="back-del-wrapper">
+                        <button className="back-btn larger-text" onClick={closeEventClickHandler}>{'< Back to events'}</button>
+                        <button className="delete-btn larger-text" onClick={deleteEventClickHandler}>{'Delete event'}</button>
+                    </div>
                     <EventDetails eventDetails={data} id={chosenId} />
                 </div>
                 : null}
