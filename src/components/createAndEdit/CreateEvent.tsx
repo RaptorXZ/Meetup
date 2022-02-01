@@ -149,7 +149,7 @@ const CreateEvent = ({events, addEvent}: Props) => {
     return(
         <div className="body">
             <div className="position-button">
-            <button className="create-button" onClick={showFormClickHandler}>{!showForm ? 'create meetup' : 'CLOSE'}</button>
+            <button className="create-button" onClick={showFormClickHandler}>{!showForm ? 'New Meetup' : 'CLOSE'}</button>
             </div>
 
             {showForm ? 

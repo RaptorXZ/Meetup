@@ -30,7 +30,7 @@ describe('create event component', () => {
     it('initially input fields are empty and has no css classes', () => {
         render(<CreateEvent events={[details]} addEvent={mockAddEvent} />)
 
-        const createButton = screen.getByRole('button', {name: 'create meetup'})
+        const createButton = screen.getByRole('button', {name: 'New Meetup'})
         userEvent.click(createButton)
         
         const [input] = screen.getAllByPlaceholderText('Type here...')
@@ -38,20 +38,20 @@ describe('create event component', () => {
         expect(input).not.toHaveClass('invalidName')
     })
 
-    it('shows a form to create a new event after user clicks button "create meetup"', () => {
+    it('shows a form to create a new event after user clicks button "New Meetup"', () => {
         render(<CreateEvent events={[details]} addEvent={mockAddEvent}/>)
 
-        const createButton = screen.getByRole('button', {name: 'create meetup'})
+        const createButton = screen.getByRole('button', {name: 'New Meetup'})
         userEvent.click(createButton)
         
         const form = screen.getByText('create your new event!')
         expect(form).toBeInTheDocument()
     })
 
-    it('hides form after user clicks again on button "create meetup"', () => {
+    it('hides form after user clicks again on button "New Meetup"', () => {
         render(<CreateEvent events={[details]} addEvent={mockAddEvent}/>)
 
-        const createButton = screen.getByRole('button', {name: 'create meetup'})
+        const createButton = screen.getByRole('button', {name: 'New Meetup'})
         userEvent.click(createButton)
         userEvent.click(createButton)
         
@@ -62,7 +62,7 @@ describe('create event component', () => {
     it('gives an input fields css class invalid if left empty when trying to submit event', () => {
         render(<Wrapper/>)
 
-        const createButton = screen.getByRole('button', {name: 'create meetup'})
+        const createButton = screen.getByRole('button', {name: 'New Meetup'})
         userEvent.click(createButton)
 
         const saveButton = screen.getByRole('button', {name: 'save meetup'})
@@ -78,7 +78,7 @@ describe('create event component', () => {
     it('becomes visible in the list after user clicks button "save meetup" and input fields are not invalid', () => {
         render(<Wrapper/>)
         
-        const createButton = screen.getByRole('button', {name: 'create meetup'})
+        const createButton = screen.getByRole('button', {name: 'New Meetup'})
         userEvent.click(createButton)
         
         const saveButton = screen.getByRole('button', {name: 'save meetup'})
@@ -99,7 +99,7 @@ describe('create event component', () => {
     it('clears input fields and checkboxes after user clicks "save meetup"', () => {
         render(<Wrapper/>)
         
-        const createButton = screen.getByRole('button', {name: 'create meetup'})
+        const createButton = screen.getByRole('button', {name: 'New Meetup'})
         userEvent.click(createButton)
         
         const saveButton = screen.getByRole('button', {name: 'save meetup'})

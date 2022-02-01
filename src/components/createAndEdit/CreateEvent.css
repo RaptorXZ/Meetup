@@ -18,13 +18,17 @@ p{
 
 .create-button{
     border: none;
-    background-color:rgba(128, 255, 0, 0);
-    color: #fff;
+    border-radius: 5px;
+    padding: 1rem;
+    font-size: 1.5rem;
+    background-color: black;
+    color:  #fff;
 }
 
 .create-button:hover{
     cursor: pointer;
-    color: cornflowerblue;
+    background-color:#7c42f1;
+    color: #fff;
 }
 
 .newEventForm .input-layout > label > input{
