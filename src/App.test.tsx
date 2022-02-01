@@ -30,22 +30,21 @@ describe('App', () => {
 	describe('filter and sorting the events', () => {
 
 		it('filters the events according to user interests', () => {
-			render(<Wrapper/>)
+			render(<App/>)
 		
-			const onlineButton = screen.getByRole('button', {name: 'Online'})
-			const techButton = screen.getByRole('button', {name: 'Tech'})
-			const gameButton = screen.getByRole('button', {name: 'Gaming'})
+			const onlocationButton = screen.getByRole('button', {name: 'OnLocation'})
+			const musicButton = screen.getByRole('button', {name: 'Music'})
+			const theatreButton = screen.getByRole('button', {name: 'Theatre'})
 
-			userEvent.click(onlineButton)
-			userEvent.click(techButton)
-			userEvent.click(gameButton)
-
-			render(<Wrapper2/>)
+			userEvent.click(onlocationButton)
+			userEvent.click(musicButton)
+			userEvent.click(theatreButton)
 
 			const events = screen.getAllByTestId('listitem-events')
 
-			expect(events[0]).toHaveTextContent(/Karaoke for coders/i)
-			expect(events[1]).toHaveTextContent(/CS Tournament/i)
+			expect(events[0]).toHaveTextContent(/Awesome Concert/i)
+			expect(events[1]).toHaveTextContent(/Painting Meetup/i)
+			expect(events[2]).toHaveTextContent(/Dinner Time/i)
 		})
 	})
 })

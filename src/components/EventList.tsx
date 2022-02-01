@@ -82,7 +82,6 @@ function EventList({userInterests} : Props) {
     const [showDetails, setShowDetails] = useState(false)
     const [showList, setShowList] = useState(true)
     const [chosenId, setChosenId] = useState('')
-	// const [userInterests, setUserInterests] = useState(JSON.parse(localStorage.getItem('interestArray') || '[]'))
 	const [filteredEvents, setFilteredEvents] = useState([])
 
 
@@ -181,7 +180,7 @@ function EventList({userInterests} : Props) {
                     <div id='event' className='event-list'>
                         {sortedByMatches.map(event => (   
                             
-                            <li className='event' key={event.id} data-testid={'event' + event.id} onClick={ () => eventClickHandler(events, event.id)}>
+                            <li className='event' key={event.id} data-testid={'event' + event.id} data-testingid='listitem-events' onClick={ () => eventClickHandler(events, event.id)}>
                                 <div>
                                 <label id="eventname-label">Eventname</label>
                                 <h3 aria-labelledby="eventname-label">{event.eventName}</h3>
