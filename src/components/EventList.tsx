@@ -189,12 +189,15 @@ function EventList({userInterests} : Props) {
                                     <img src={event.image} alt={event.eventName} height="150px" />
                                 </div>
                             </div>
-                            
-                            <div className='all-paragraph'>
-                                <div>
-                                    <p>{event.date}, {event.time}</p>
-                                    <p>{event.location}</p>
-                                </div>
+
+								
+							<div className='all-paragraph'>
+
+								<div className='date-location'>
+								<p>{event.date}, {event.time}</p>
+								<p>{event.location}</p>
+								</div>
+
                                 <div className='interest-list'>
                                 <label id="interest-label">Interest</label>
                                 {event.interests.map(interest => (
