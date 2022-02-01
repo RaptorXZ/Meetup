@@ -48,7 +48,18 @@ describe('create event component', () => {
         expect(form).toBeInTheDocument()
     })
 
-    it('an input fields gets class invalid if left empty when trying to submit event', () => {
+    it('hides form after user clicks again on button "create meetup"', () => {
+        render(<CreateEvent events={[details]} addEvent={mockAddEvent}/>)
+
+        const createButton = screen.getByRole('button', {name: 'create meetup'})
+        userEvent.click(createButton)
+        userEvent.click(createButton)
+        
+        const form = screen.queryByText('create your new event!')
+        expect(form).not.toBeInTheDocument()
+    })
+
+    it('gives an input fields css class invalid if left empty when trying to submit event', () => {
         render(<Wrapper/>)
 
         const createButton = screen.getByRole('button', {name: 'create meetup'})
@@ -85,7 +96,7 @@ describe('create event component', () => {
     })
 
 
-    it('closes the form and clears input fields and checkboxes after user clicks "save meetup"', () => {
+    it('clears input fields and checkboxes after user clicks "save meetup"', () => {
         render(<Wrapper/>)
         
         const createButton = screen.getByRole('button', {name: 'create meetup'})
@@ -97,7 +108,7 @@ describe('create event component', () => {
         const imageRadio = screen.getAllByPlaceholderText('photo')
 
         userEvent.click(saveButton)
-
+        
         input.forEach( input => 
 			expect(input).toHaveValue('')
 		)
@@ -107,8 +118,5 @@ describe('create event component', () => {
         imageRadio.forEach( imageRadio => 
 			expect(imageRadio).not.toBeChecked()
 		)
-
-        const form = screen.queryByText('create your new event!')
-        expect(form).not.toBeInTheDocument()
     })
 })
