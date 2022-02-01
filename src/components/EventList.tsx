@@ -54,7 +54,7 @@ const data: Events[] = [
         interests: ['Tech', 'Gaming'],
         description: "Noobs and pros welcome. Teams of 5. Viewers also welcome. Participation is free, viewers pay $5 entry. Bring your own tech.",
         location: 'Stockholm',
-        date: '2/2/2022',
+        date: '15/2/2022',
         time: '13:00',
         hostName: 'the_tournament_host', 
 		matches: 0
@@ -66,7 +66,7 @@ const data: Events[] = [
         interests: ['Art', 'Theatre', 'OnLocation'],
         description: 'Are you intrested in art and love painting? Then this is the event for you!',
         location: 'Gothenburg, Änggårdsgatan 46',
-        date: '24/1/2022',
+        date: '24/4/2022',
         time: '16:30',
         hostName: 'julie_arts', 
 		matches: 0
@@ -124,7 +124,7 @@ function EventList({userInterests} : Props) {
         setShowDetails(!showDetails)
     }
 
-    const deleteEventClickHandler = () => {
+	const deleteEventClickHandler = () => {
         const eventsArr: Events[] = events;
         let filteredEvents: Events[] = eventsArr.filter(function(e) { return e.id !== chosenId})
         console.log(filteredEvents)
